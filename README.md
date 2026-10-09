@@ -38,6 +38,11 @@ tipografia pesada, selos que imitam carimbo de tinta, anotações manuscritas na
 margens e objetos de cenário (caixas, granadas, estojos de bala) espalhados
 fora da coluna de conteúdo, desfocados para ficarem atrás do texto.
 
+A arte está toda aqui: **16 ilustrações** (uma por recorde, 4:3, em
+`assets/ilustracoes/`), **21 selos** que imitam carimbo (`assets/selos/`) e
+**10 objetos de cenário** (`assets/laterais/`), além de logo, banner e ícones
+de navegação.
+
 Os tokens vivem em **`apps/web/src/styles/global.css`** — é o arquivo mais
 importante para entender o visual. Em resumo:
 
@@ -117,9 +122,16 @@ Pontos que já incomodam e onde uma proposta visual é bem-vinda:
 
 - **A home** (`/`) e o **Jornal** ainda usam o cabeçalho de texto antigo. A
   identidade HALL só foi aplicada em `/hall`; as outras telas destoam.
-- **14 dos 16 recordes não têm ilustração própria.** Hoje caem num desenho
-  genérico feito em código (`packages/card/src/ilustracoes.ts`). O slot existe
-  e é um arquivo solto — basta a arte.
+- **Quatro selos alternativos estão sem uso.** A pasta tem 21 arquivos para 16
+  recordes: cinco recordes ganharam duas versões de selo, e `lib/selos.ts` só
+  escolhe uma. Sobram `economia-de-bala--1-bala-basta`,
+  `garcom-de-ouro--serviu-no-prato`, `nunca-abriu--sempre-atras` e
+  `vendeu-caro--serviu-a-vida`.
+- **O PNG compartilhado não usa as ilustrações.** Na tela, o card mostra a arte
+  de `assets/ilustracoes/`; no canvas, cai no desenho vetorial de
+  `packages/card/src/ilustracoes.ts`, que é bem mais pobre. Compare
+  `referencia/html/hall.html` com `referencia/cards/*.png` e a diferença fica
+  evidente.
 - **A pílula de filtro no Hall é placeholder**, desenhada mas desligada.
 - **Densidade no celular**: os cards foram desenhados pensando em duas colunas;
   abaixo de `md` tudo vira uma coluna longa.

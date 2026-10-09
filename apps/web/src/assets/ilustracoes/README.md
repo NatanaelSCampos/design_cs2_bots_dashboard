@@ -8,11 +8,22 @@ passa a usar a imagem automaticamente — nenhuma mudança de código.
 | `passeio-no-mapa.webp` | Hall da Vergonha — menor dano por round |
 | `entregou-o-corpo.webp` | Hall da Vergonha — mortes por round |
 | `abriu-o-round.webp` | Hall da Vergonha — primeira morte do time |
-| `inimigo-interno.webp` | Hall da Vergonha — dano em aliados |
-| `cegou-os-proprios.webp` | Hall da Vergonha — flash amiga |
+| `inimigo-interno.webp` | Hall da Vergonha — dano em aliados por round |
+| `cegou-os-proprios.webp` | Hall da Vergonha — segundos de flash amiga por round |
 | `carregou-sozinho.webp` | Hall da Fama — maior dano por round |
 | `colheita.webp` | Hall da Fama — abates por round |
-| `sobreviveu-a-tudo.webp` | Hall da Fama — menor taxa de mortes |
+| `sobreviveu-a-tudo.webp` | Hall da Fama — menor taxa de mortes por round |
+| `chuveirinho.webp` | Hall da Vergonha — dano gasto por abate |
+| `pacifista.webp` | Hall da Vergonha — menor número de abates por round |
+| `vendeu-barato.webp` | Hall da Vergonha — menor dano causado por morte |
+| `so-assistencia.webp` | Hall da Vergonha — assistências por abate |
+| `economia-de-bala.webp` | Hall da Fama — menor dano gasto por abate |
+| `vendeu-caro.webp` | Hall da Fama — dano causado por morte |
+| `garcom-de-ouro.webp` | Hall da Fama — assistências por round |
+| `nunca-abriu.webp` | Hall da Fama — menor taxa de primeira morte do time |
+
+Os dezesseis já existem. Esta tabela é o mapa para substituir qualquer
+um deles: basta trocar o arquivo mantendo o nome.
 
 Extensões aceitas: `.webp`, `.png`, `.jpg`, `.avif`. Sem arquivo, o card cai na
 arte desenhada em código — nunca fica sem imagem.
