@@ -1,0 +1,24 @@
+{
+  "name": "@hall/web",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "typecheck": "astro check --minimumSeverity error"
+  },
+  "dependencies": {
+    "@astrojs/node": "^11.1.6",
+    "@lobby/card": "*",
+    "@lobby/contracts": "*",
+    "astro": "^7.3.4"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.10",
+    "@tailwindcss/vite": "^4.3.3",
+    "tailwindcss": "^4.3.3",
+    "typescript": "5.9.3"
+  }
+}

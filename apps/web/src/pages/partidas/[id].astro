@@ -1,0 +1,184 @@
+---
+import Base from "../../layouts/Base.astro";
+import Aviso from "../../components/Aviso.astro";
+import Tile from "../../components/Tile.astro";
+import Tiles from "../../components/Tiles.astro";
+import { ApiError, buscarPartida } from "../../lib/api.ts";
+import {
+  dataHora,
+  formato,
+  nomeDe,
+  numero,
+  plataforma,
+  paramDecodificado,
+  rotuloMetrica,
+} from "../../lib/format.ts";
+import type { MatchDetail, MetricResult } from "@lobby/contracts";
+
+const matchId = paramDecodificado(Astro.params.id);
+
+let partida: MatchDetail | null = null;
+let erro: string | null = null;
+
+try {
+  partida = await buscarPartida(matchId);
+} catch (e) {
+  erro = e instanceof ApiError ? e.message : String(e);
+}
+
+if (!partida && !erro) {
+  Astro.response.status = 404;
+}
+
+const m = partida?.match;
+const jogadores = [...(partida?.players ?? [])]
+  .filter((p) => p.team !== "spectator")
+  .sort((a, b) => b.damage_dealt - a.damage_dealt);
+
+/** Métricas agrupadas por jogador, para a tabela não repetir linha por métrica. */
+const metricasPorJogador = new Map<string, Map<string, MetricResult>>();
+for (const metrica of partida?.metrics ?? []) {
+  const doJogador = metricasPorJogador.get(metrica.player_ref) ?? new Map();
+  doJogador.set(metrica.metric_id, metrica);
+  metricasPorJogador.set(metrica.player_ref, doJogador);
+}
+
+function metrica(ref: string, id: string) {
+  return metricasPorJogador.get(ref)?.get(id) ?? null;
+}
+
+const adr = (p: (typeof jogadores)[number]) =>
+  p.rounds_played === 0 ? 0 : p.damage_dealt / p.rounds_played;
+---
+
+<Base
+  titulo={m ? `${m.map_name}` : "Partida"}
+  subtitulo={m
+    ? `${plataforma(m.platform)} · ${formato(m.player_count)} · ${dataHora(m.started_at)}`
+    : undefined}
+>
+  {erro && <Aviso titulo="Não consegui carregar a partida" detalhe={erro} />}
+
+  {
+    !partida && !erro && (
+      <Aviso
+        titulo="Partida não encontrada"
+        detalhe="O identificador não existe ou a ingestão dela não foi concluída."
+      />
+    )
+  }
+
+  {
+    partida && m && (
+      <div class="flex flex-col gap-10">
+        <Tiles>
+          <Tile valor={`${m.team_a_score}–${m.team_b_score}`} rotulo="placar" detalhe="time A–time B" />
+          <Tile valor={String(m.rounds_played)} rotulo="rounds" />
+          <Tile valor={String(m.member_count)} rotulo="membros da liga" detalhe={`de ${m.player_count} jogadores`} />
+          <Tile
+            valor={m.formula_version}
+            rotulo="versão da fórmula"
+            detalhe={partida.events_bytes ? `${(partida.events_bytes / 1024).toFixed(1)} KB no R2` : ""}
+          />
+        </Tiles>
+
+        {m.member_count === 1 && (
+          <Aviso
+            titulo="Só um membro da liga nesta partida"
+            detalhe="Prêmios comparativos precisam de pelo menos dois membros para existir disputa."
+          />
+        )}
+
+        <section class="flex flex-col gap-4">
+          <h2 class="font-display text-xl font-semibold">Placar</h2>
+          <div class="overflow-x-auto rounded-md border border-line">
+            <table class="w-full min-w-[42rem] border-collapse text-sm">
+              <thead>
+                <tr class="border-b border-line text-left font-mono text-[0.68rem] tracking-[0.08em] text-ink-faint uppercase">
+                  <th class="px-4 py-3 font-medium">Jogador</th>
+                  <th class="px-4 py-3 font-medium">Time</th>
+                  <th class="px-4 py-3 text-right font-medium">K</th>
+                  <th class="px-4 py-3 text-right font-medium">D</th>
+                  <th class="px-4 py-3 text-right font-medium">A</th>
+                  <th class="px-4 py-3 text-right font-medium">ADR</th>
+                  <th class="px-4 py-3 text-right font-medium">1ª morte</th>
+                  <th class="px-4 py-3 text-right font-medium">Dano em aliado</th>
+                </tr>
+              </thead>
+              <tbody>
+                {jogadores.map((p) => {
+                  const primeiras = metrica(p.player_ref, "first_death_rate");
+                  const aliado = metrica(p.player_ref, "team_damage_per_round");
+                  return (
+                    <tr class="border-b border-line/60 last:border-b-0 hover:bg-surface">
+                      <td class="px-4 py-3">
+                        {p.is_member ? (
+                          <a
+                            class="text-accent hover:underline"
+                            href={`/jogadores/${encodeURIComponent(p.player_ref)}`}
+                          >
+                            {nomeDe(p.player_ref, p.display_name)}
+                          </a>
+                        ) : (
+                          <span class="num text-ink-faint">
+                            {nomeDe(p.player_ref, p.display_name)}
+                          </span>
+                        )}
+                      </td>
+                      <td class="px-4 py-3 text-ink-soft">{p.team === "team_a" ? "A" : "B"}</td>
+                      <td class="num px-4 py-3 text-right">{p.kills}</td>
+                      <td class="num px-4 py-3 text-right">{p.deaths}</td>
+                      <td class="num px-4 py-3 text-right">{p.assists}</td>
+                      <td class="num px-4 py-3 text-right">{numero(adr(p))}</td>
+                      <td class="num px-4 py-3 text-right text-ink-soft">
+                        {primeiras ? `${primeiras.numerator}/${primeiras.denominator}` : "—"}
+                      </td>
+                      <td class="num px-4 py-3 text-right text-ink-soft">
+                        {aliado ? numero(aliado.numerator, 0) : "—"}
+                      </td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </div>
+          <p class="text-sm text-ink-faint">
+            Quem não é membro da liga aparece com um identificador anônimo, diferente em cada
+            partida. ADR é dano dividido pelos rounds que a pessoa jogou.
+          </p>
+        </section>
+
+        <section class="flex flex-col gap-4">
+          <h2 class="font-display text-xl font-semibold">Prêmios desta partida</h2>
+          {partida.awards.length === 0 ? (
+            <p class="text-ink-soft">
+              Nenhum. Prêmios comparativos exigem dois membros elegíveis e amostra mínima.
+            </p>
+          ) : (
+            <div class="flex flex-col gap-px overflow-hidden rounded-md border border-line bg-line">
+              {partida.awards.map((a) => {
+                const vencedor = jogadores.find((p) => p.player_ref === a.winner_ref);
+                return (
+                  <div class="flex flex-col gap-1 bg-surface p-5">
+                    <div class="flex flex-wrap items-baseline gap-x-3">
+                      <span class="font-display text-lg font-semibold">{a.award_id}</span>
+                      <span class="num text-sm text-accent">
+                        {nomeDe(a.winner_ref, vencedor?.display_name ?? null)}
+                      </span>
+                      <span class="num text-sm text-ink-faint">
+                        {numero(a.numerator, 0)}/{numero(a.denominator, 0)}
+                      </span>
+                    </div>
+                    <p class="text-sm text-ink-soft">
+                      {rotuloMetrica(a.metric_id)} · {a.criterion}
+                    </p>
+                  </div>
+                );
+              })}
+            </div>
+          )}
+        </section>
+      </div>
+    )
+  }
+</Base>

@@ -1,0 +1,24 @@
+---
+/**
+ * Moldura de um gráfico.
+ *
+ * O título nomeia o que está plotado, e por isso **não existe caixa de legenda**
+ * nos gráficos do painel: todos têm uma única série, então uma legenda com um
+ * quadradinho só repetiria o título e gastaria espaço.
+ */
+interface Props {
+  titulo: string;
+  legenda?: string;
+}
+const { titulo, legenda } = Astro.props;
+---
+
+<section class="flex h-full flex-col gap-4 rounded-md border border-line bg-surface p-5">
+  <header class="flex flex-col gap-0.5">
+    <h2 class="font-display text-base font-semibold text-ink">{titulo}</h2>
+    {legenda && <p class="text-xs text-ink-faint">{legenda}</p>}
+  </header>
+  <div class="flex-1">
+    <slot />
+  </div>
+</section>

@@ -1,0 +1,237 @@
+---
+import Base from "../layouts/Base.astro";
+import Aviso from "../components/Aviso.astro";
+import Cartao from "../components/Cartao.astro";
+import { ApiError, listarPartidas } from "../lib/api.ts";
+import { dataCurta, formato, plataforma } from "../lib/format.ts";
+import { agregar, mapasDisponiveis, chaveLobby } from "../lib/painel.ts";
+import type { MatchList } from "@lobby/contracts";
+
+let lista: MatchList | null = null;
+let erro: string | null = null;
+
+try {
+  lista = await listarPartidas();
+} catch (e) {
+  erro = e instanceof ApiError ? e.message : String(e);
+}
+
+const partidas = lista?.matches ?? [];
+// Render inicial do servidor. O mesmo cálculo roda no navegador quando o leitor
+// troca um filtro, pela MESMA função — o painel nunca discorda de si mesmo.
+const resumo = agregar(partidas);
+const mapas = mapasDisponiveis(partidas);
+
+const FILTROS = [
+  {
+    campo: "formato",
+    rotulo: "Formato",
+    opcoes: [
+      { valor: "todos", rotulo: "Todos" },
+      { valor: "5v5", rotulo: "5v5" },
+      { valor: "wingman", rotulo: "Wingman" },
+    ],
+  },
+  {
+    campo: "lobby",
+    rotulo: "Lobby",
+    opcoes: [
+      { valor: "todos", rotulo: "Todos" },
+      { valor: "com_amigos", rotulo: "Com amigos" },
+      { valor: "sozinho", rotulo: "Sozinho" },
+    ],
+  },
+] as const;
+---
+
+<Base
+  titulo="Partidas"
+  subtitulo="Tudo que o lobby jogou, da mais recente para a mais antiga. Só aparecem partidas com ingestão concluída."
+>
+  {erro && <Aviso titulo="Não consegui carregar as partidas" detalhe={erro} />}
+
+  {
+    !erro && partidas.length === 0 && (
+      <Aviso
+        titulo="Nenhuma partida ainda"
+        detalhe="Rode `npm run collector -- ingest <demo.dem>` para a primeira, ou `npm run collector -- watch` para coletar sozinho."
+      />
+    )
+  }
+
+  {
+    partidas.length > 0 && (
+      <div class="flex flex-col gap-8">
+        {/*
+          Hero figure: o número que o painel lidera. Um só por tela, em sans
+          proporcional — `tabular-nums` deixa 121 frouxo em tamanho grande.
+        */}
+        <div class="flex flex-wrap items-end gap-x-10 gap-y-6">
+          <div class="flex items-baseline gap-3">
+            <span
+              data-figura
+              class="font-body text-6xl leading-none font-semibold tracking-tight text-ink"
+            >
+              {resumo.partidas}
+            </span>
+            <span data-figura-rotulo class="text-lg text-ink-soft">
+              {resumo.partidas === 1 ? "partida" : "partidas"}
+            </span>
+          </div>
+
+          <dl class="flex flex-wrap gap-x-8 gap-y-4">
+            <div>
+              <dt class="text-xs tracking-[0.08em] text-ink-faint uppercase">Rounds</dt>
+              <dd data-kpi="rounds" class="num text-2xl font-semibold">{resumo.rounds}</dd>
+            </div>
+            <div>
+              <dt class="text-xs tracking-[0.08em] text-ink-faint uppercase">Mediana/partida</dt>
+              <dd data-kpi="mediana" class="num text-2xl font-semibold">
+                {resumo.roundsMedianos || "—"}
+              </dd>
+            </div>
+            <div>
+              <dt class="text-xs tracking-[0.08em] text-ink-faint uppercase">Com amigos</dt>
+              <dd data-kpi="amigos" class="num text-2xl font-semibold">{resumo.comAmigos}</dd>
+            </div>
+            <div>
+              <dt class="text-xs tracking-[0.08em] text-ink-faint uppercase">Mapas</dt>
+              <dd data-kpi="mapas" class="num text-2xl font-semibold">{resumo.mapasDistintos}</dd>
+            </div>
+          </dl>
+        </div>
+
+        {/*
+          Filtros numa linha só, acima de tudo que eles recortam. Ficam escondidos
+          até o script assumir, para não oferecer botão que não faz nada.
+        */}
+        <div
+          data-controles
+          hidden
+          class="flex flex-wrap items-center gap-x-6 gap-y-3 border-y border-line py-3"
+        >
+          {FILTROS.map((f) => (
+            <div class="flex items-center gap-2" data-filtro={f.campo}>
+              <span class="text-xs tracking-[0.08em] text-ink-faint uppercase">{f.rotulo}</span>
+              <div class="flex gap-1">
+                {f.opcoes.map((o, i) => (
+                  <button
+                    type="button"
+                    data-valor={o.valor}
+                    aria-pressed={i === 0 ? "true" : "false"}
+                    class="rounded-sm border border-line px-2.5 py-1 text-sm text-ink-soft transition-colors hover:text-ink aria-pressed:border-accent aria-pressed:bg-accent-ghost aria-pressed:text-ink"
+                  >
+                    {o.rotulo}
+                  </button>
+                ))}
+              </div>
+            </div>
+          ))}
+
+          <label class="flex items-center gap-2">
+            <span class="text-xs tracking-[0.08em] text-ink-faint uppercase">Mapa</span>
+            <select
+              data-filtro-mapa
+              class="rounded-sm border border-line bg-surface px-2 py-1 text-sm text-ink"
+            >
+              <option value="todos">Todos</option>
+              {mapas.map((m) => (
+                <option value={m}>{m.replace(/^de_/, "")}</option>
+              ))}
+            </select>
+          </label>
+        </div>
+
+        {/*
+          Gráficos: melhoria progressiva. Escondidos sem JS, porque a tabela
+          abaixo já carrega todos os números (é a "table view" deles).
+        */}
+        <div id="painel" hidden class="grid gap-5 lg:grid-cols-3">
+          <div class="lg:col-span-3">
+            <Cartao titulo="Atividade por dia" legenda="Partidas concluídas, dias vazios incluídos">
+              <div data-grafico="dias"></div>
+            </Cartao>
+          </div>
+          <div class="lg:col-span-2">
+            <Cartao titulo="Mapas mais jogados" legenda="Partidas por mapa, do mais ao menos jogado">
+              <div data-grafico="mapas" class="flex flex-col"></div>
+            </Cartao>
+          </div>
+          <Cartao titulo="Composição do lobby" legenda="Quantos membros da liga por partida">
+            <div data-grafico="lobby" class="flex flex-col"></div>
+          </Cartao>
+        </div>
+
+        <div>
+          <div class="overflow-x-auto rounded-md border border-line">
+            <table class="w-full min-w-[46rem] border-collapse text-sm">
+              <thead>
+                <tr class="border-b border-line text-left font-mono text-[0.68rem] tracking-[0.08em] text-ink-faint uppercase">
+                  <th class="px-4 py-3 font-medium">Quando</th>
+                  <th class="px-4 py-3 font-medium">Mapa</th>
+                  <th class="px-4 py-3 font-medium">Formato</th>
+                  <th class="px-4 py-3 font-medium">Origem</th>
+                  <th class="px-4 py-3 text-right font-medium">Rounds</th>
+                  <th class="px-4 py-3 text-right font-medium">Placar</th>
+                  <th class="px-4 py-3 text-right font-medium">Membros</th>
+                </tr>
+              </thead>
+              <tbody>
+                {partidas.map((m) => (
+                  <tr
+                    data-partida={m.match_id}
+                    class="border-b border-line/60 last:border-b-0 hover:bg-surface"
+                  >
+                    <td class="px-4 py-3">
+                      <a
+                        class="num text-accent hover:underline"
+                        href={`/partidas/${encodeURIComponent(m.match_id)}`}
+                      >
+                        {dataCurta(m.started_at)}
+                      </a>
+                    </td>
+                    <td class="px-4 py-3">{m.map_name.replace(/^de_/, "")}</td>
+                    <td class="px-4 py-3 text-ink-soft">{formato(m.player_count)}</td>
+                    <td class="px-4 py-3 text-ink-soft">{plataforma(m.platform)}</td>
+                    <td class="num px-4 py-3 text-right">{m.rounds_played}</td>
+                    <td class="num px-4 py-3 text-right">
+                      {m.team_a_score}–{m.team_b_score}
+                    </td>
+                    <td class="num px-4 py-3 text-right">
+                      {chaveLobby(m.member_count) === "sozinho" ? (
+                        <span class="text-ink-faint" title="Só um membro da liga nesta partida">
+                          {m.member_count}
+                        </span>
+                      ) : (
+                        m.member_count
+                      )}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+
+          <p data-tabela-vazia hidden class="mt-4 text-sm text-ink-faint">
+            Nenhuma partida neste recorte. Afrouxe os filtros.
+          </p>
+
+          <p class="mt-4 text-sm text-ink-faint">
+            O placar é sempre time&nbsp;A–time&nbsp;B, onde time&nbsp;A é quem começou de CT no
+            primeiro round. Os lados acompanham as trocas do intervalo e da prorrogação.
+          </p>
+        </div>
+
+        <script
+          id="dados-painel"
+          type="application/json"
+          set:html={JSON.stringify(partidas)}
+        />
+      </div>
+    )
+  }
+</Base>
+
+<script>
+  import "../scripts/painel.ts";
+</script>

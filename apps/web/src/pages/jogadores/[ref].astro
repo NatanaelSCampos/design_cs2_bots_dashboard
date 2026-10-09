@@ -1,0 +1,149 @@
+---
+import Base from "../../layouts/Base.astro";
+import Aviso from "../../components/Aviso.astro";
+import Tile from "../../components/Tile.astro";
+import Tiles from "../../components/Tiles.astro";
+import { ApiError, buscarJogador } from "../../lib/api.ts";
+import {
+  dataHora,
+  formato,
+  nomeDe,
+  numero,
+  plataforma,
+  paramDecodificado,
+  porcento,
+  rotuloBalde,
+  rotuloEixo,
+} from "../../lib/format.ts";
+import type { PlayerProfile } from "@lobby/contracts";
+
+const playerRef = paramDecodificado(Astro.params.ref);
+
+let perfil: PlayerProfile | null = null;
+let erro: string | null = null;
+
+try {
+  perfil = await buscarJogador(playerRef);
+} catch (e) {
+  erro = e instanceof ApiError ? e.message : String(e);
+}
+
+if (!perfil && !erro) {
+  Astro.response.status = 404;
+}
+
+const t = perfil?.report.totals;
+const recortes = (perfil?.report.buckets ?? []).filter((b) => b.axis !== null);
+---
+
+<Base
+  titulo={perfil ? nomeDe(perfil.report.player_ref, perfil.report.display_name) : "Jogador"}
+  subtitulo={t ? `${t.matches} partidas · ${t.rounds} rounds jogados` : undefined}
+>
+  {erro && <Aviso titulo="Não consegui carregar o perfil" detalhe={erro} />}
+
+  {!perfil && !erro && (
+    <Aviso
+      titulo="Jogador sem partidas"
+      detalhe="Só membros da liga com partida concluída têm perfil. Terceiros são anonimizados por partida e não acumulam histórico."
+    />
+  )}
+
+  {perfil && t && (
+    <div class="flex flex-col gap-10">
+      <Tiles>
+        <Tile valor={numero(t.adr)} rotulo="dano por round" detalhe={`${t.damage_dealt} / ${t.rounds}`} />
+        <Tile valor={numero(t.kd, 2)} rotulo="abates por morte" detalhe={`${t.kills} / ${t.deaths}`} />
+        <Tile valor={porcento(t.first_death_rate)} rotulo="1ª morte do time" detalhe={`${t.first_deaths} / ${t.rounds}`} />
+        <Tile valor={numero(t.team_damage_per_round, 2)} rotulo="dano em aliados" detalhe={`${numero(t.team_damage, 0)} / ${t.rounds}`} />
+      </Tiles>
+
+      {perfil.report.awards.length > 0 && (
+        <section class="flex flex-col gap-4">
+          <h2 class="font-display text-xl font-semibold">Prêmios</h2>
+          <div class="flex flex-col gap-px overflow-hidden rounded-md bg-line">
+            {perfil.report.awards.map((a) => (
+              <div class="bg-surface p-5">
+                <div class="flex flex-wrap items-baseline gap-x-3">
+                  <h3 class="font-display text-lg font-semibold">{a.title}</h3>
+                  <span class="num text-sm text-accent">{numero(a.ratio, 2)}×</span>
+                </div>
+                <p class="mt-1 text-sm text-ink-soft italic">“{a.verdict}”</p>
+                <p class="mt-2 text-xs text-ink-faint">{a.criterion}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
+
+      {recortes.length > 0 && (
+        <section class="flex flex-col gap-4">
+          <h2 class="font-display text-xl font-semibold">Recortes</h2>
+          <div class="overflow-x-auto rounded-md border border-line">
+            <table class="w-full min-w-[40rem] border-collapse text-sm">
+              <thead>
+                <tr class="border-b border-line text-left font-mono text-[0.68rem] tracking-[0.08em] text-ink-faint uppercase">
+                  <th class="px-4 py-3 font-medium">Recorte</th>
+                  <th class="px-4 py-3 text-right font-medium">Rounds</th>
+                  <th class="px-4 py-3 text-right font-medium">ADR</th>
+                  <th class="px-4 py-3 text-right font-medium">K/D</th>
+                  <th class="px-4 py-3 text-right font-medium">1ª morte</th>
+                  <th class="px-4 py-3 text-right font-medium">Amostra</th>
+                </tr>
+              </thead>
+              <tbody>
+                {recortes.map((b) => (
+                  <tr class="border-b border-line/60 last:border-b-0">
+                    <td class="px-4 py-3">
+                      {rotuloBalde(b.bucket)}
+                      <span class="ml-2 text-xs text-ink-faint">{rotuloEixo(b.axis ?? "")}</span>
+                    </td>
+                    <td class="num px-4 py-3 text-right">{b.rounds}</td>
+                    <td class="num px-4 py-3 text-right">{numero(b.adr)}</td>
+                    <td class="num px-4 py-3 text-right">{numero(b.kd, 2)}</td>
+                    <td class="num px-4 py-3 text-right">{porcento(b.first_death_rate)}</td>
+                    <td class="px-4 py-3 text-right">
+                      {b.sample_ok ? <span class="text-ok">ok</span> : <span class="text-warn">curta</span>}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </section>
+      )}
+
+      <section class="flex flex-col gap-4">
+        <h2 class="font-display text-xl font-semibold">Partidas</h2>
+        <div class="overflow-x-auto rounded-md border border-line">
+          <table class="w-full min-w-[40rem] border-collapse text-sm">
+            <thead>
+              <tr class="border-b border-line text-left font-mono text-[0.68rem] tracking-[0.08em] text-ink-faint uppercase">
+                <th class="px-4 py-3 font-medium">Quando</th>
+                <th class="px-4 py-3 font-medium">Origem</th>
+                <th class="px-4 py-3 font-medium">Mapa</th>
+                <th class="px-4 py-3 font-medium">Formato</th>
+                <th class="px-4 py-3 text-right font-medium">Placar</th>
+              </tr>
+            </thead>
+            <tbody>
+              {perfil.matches.map((m) => (
+                <tr class="border-b border-line/60 last:border-b-0 hover:bg-surface">
+                  <td class="px-4 py-3">
+                    <a class="num text-accent hover:underline" href={`/partidas/${encodeURIComponent(m.match_id)}`}>
+                      {dataHora(m.started_at)}
+                    </a>
+                  </td>
+                  <td class="px-4 py-3 text-ink-soft">{plataforma(m.platform)}</td>
+                  <td class="px-4 py-3">{m.map_name}</td>
+                  <td class="px-4 py-3 text-ink-soft">{formato(m.player_count)}</td>
+                  <td class="num px-4 py-3 text-right">{m.team_a_score}–{m.team_b_score}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+  )}
+</Base>

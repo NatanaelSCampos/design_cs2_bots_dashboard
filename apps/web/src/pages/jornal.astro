@@ -1,0 +1,292 @@
+---
+import Base from "../layouts/Base.astro";
+import Aviso from "../components/Aviso.astro";
+import Avatar from "../components/Avatar.astro";
+import Selo from "../components/Selo.astro";
+import Compartilhar from "../components/Compartilhar.astro";
+import { ApiError, buscarPremios } from "../lib/api.ts";
+import { nomeDe, numero, porcento, rotuloBalde, rotuloEixo, rotuloMetrica } from "../lib/format.ts";
+import { cardDePremio } from "../lib/paraCard.ts";
+import type { AwardsReport, BucketStats, ContrastAward } from "@lobby/contracts";
+
+let relatorio: AwardsReport | null = null;
+let erro: string | null = null;
+
+try {
+  relatorio = await buscarPremios();
+} catch (e) {
+  erro = e instanceof ApiError ? e.message : String(e);
+}
+
+/** O valor da estatística que o prêmio compara, com a unidade ao lado. */
+function valorDe(award: ContrastAward, lado: BucketStats): { valor: string; unidade: string } {
+  const bruto = lado[award.stat];
+  if (award.stat === "first_death_rate") {
+    return { valor: numero(bruto * 100, 1), unidade: "% dos rounds" };
+  }
+  if (award.stat === "adr") return { valor: numero(bruto), unidade: "dano/round" };
+  if (award.stat === "team_damage_per_round") {
+    return { valor: numero(bruto, 2), unidade: "dano aliado/round" };
+  }
+  if (award.stat === "friendly_flash_per_round") {
+    return { valor: numero(bruto, 2), unidade: "s de flash/round" };
+  }
+  return { valor: numero(bruto, 2), unidade: "abates/morte" };
+}
+
+function brutoDe(award: ContrastAward, lado: BucketStats): string {
+  if (award.stat === "adr") return `${lado.damage_dealt} de dano em ${lado.rounds} rounds`;
+  if (award.stat === "first_death_rate") return `${lado.first_deaths} em ${lado.rounds} rounds`;
+  if (award.stat === "team_damage_per_round") {
+    return `${numero(lado.team_damage, 0)} de dano em ${lado.rounds} rounds`;
+  }
+  if (award.stat === "friendly_flash_per_round") {
+    return `${numero(lado.friendly_flash_seconds)}s em ${lado.rounds} rounds`;
+  }
+  return `${lado.kills}/${lado.deaths} em ${lado.rounds} rounds`;
+}
+
+/** Barra proporcional ao maior dos dois lados, com folga para o rótulo. */
+function largura(award: ContrastAward, lado: BucketStats): number {
+  const maximo = Math.max(award.high[award.stat], award.low[award.stat]) * 1.08;
+  const p = maximo > 0 ? lado[award.stat] / maximo : 0;
+  return Math.max(2, Math.min(100, p * 100));
+}
+
+const jogadores = relatorio?.players ?? [];
+---
+
+<Base
+  titulo="Jornal do Lobby"
+  subtitulo="Carreira de cada membro e os prêmios que os números sustentam. Quando um prêmio não sai, o motivo aparece junto."
+>
+  {erro && <Aviso titulo="Não consegui carregar o Jornal" detalhe={erro} />}
+
+  {
+    relatorio && jogadores.length === 0 && (
+      <Aviso
+        titulo="Nenhum membro em partida concluída"
+        detalhe="Preencha config/league-members.json com os SteamID64 do lobby e reprocesse as demos."
+      />
+    )
+  }
+
+  {
+    jogadores.length > 0 && (
+      <div class="flex flex-col gap-8">
+        <p class="num text-sm text-ink-faint">
+          {relatorio!.matches_considered} partidas · fórmula {relatorio!.formula_version}
+        </p>
+
+        {/*
+          Seleção por jogador em vez de uma pilha com todos. Cada card é um
+          botão: sem JS, o primeiro jogador fica visível e os links de perfil
+          continuam funcionando.
+        */}
+        <div data-abas class="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+          {jogadores.map((j, i) => (
+            <button
+              type="button"
+              data-aba={j.player_ref}
+              aria-pressed={i === 0 ? "true" : "false"}
+              class="flex items-center gap-3 rounded-md border border-line bg-surface p-4 text-left transition-colors hover:border-ink-faint aria-pressed:border-accent aria-pressed:bg-accent-ghost"
+            >
+              <Avatar
+                nome={nomeDe(j.player_ref, j.display_name)}
+                semente={j.player_ref}
+                tamanho="md"
+              />
+              <span class="flex min-w-0 flex-col">
+                <span class="truncate font-display text-lg font-semibold">
+                  {nomeDe(j.player_ref, j.display_name)}
+                </span>
+                <span class="num text-xs text-ink-faint">
+                  {j.totals.matches} part. · ADR {numero(j.totals.adr)} · K/D{" "}
+                  {numero(j.totals.kd, 2)}
+                </span>
+              </span>
+              {j.awards.length > 0 && (
+                <span class="num ml-auto shrink-0 rounded-full bg-sunk px-2 py-0.5 text-xs text-ink-soft">
+                  {j.awards.length}★
+                </span>
+              )}
+            </button>
+          ))}
+        </div>
+
+        {jogadores.map((jogador, i) => {
+          const t = jogador.totals;
+          const recortes = jogador.buckets.filter((b) => b.axis !== null);
+          return (
+            <article data-painel={jogador.player_ref} hidden={i !== 0} class="flex flex-col gap-8">
+              {/* Carreira como números de destaque, não como parágrafo. */}
+              <div class="grid grid-cols-2 gap-px overflow-hidden rounded-md border border-line bg-line sm:grid-cols-3 lg:grid-cols-6">
+                {[
+                  { r: "Partidas", v: String(t.matches), d: `${t.rounds} rounds` },
+                  { r: "ADR", v: numero(t.adr), d: "dano/round" },
+                  { r: "K/D", v: numero(t.kd, 2), d: `${t.kills}K ${t.deaths}D` },
+                  { r: "Assistências", v: String(t.assists), d: "no total" },
+                  {
+                    r: "1ª morte",
+                    v: porcento(t.rounds > 0 ? t.first_deaths / t.rounds : 0, 1),
+                    d: `${t.first_deaths} de ${t.rounds} rounds`,
+                  },
+                  { r: "Prêmios", v: String(jogador.awards.length), d: "nesta fórmula" },
+                ].map((k) => (
+                  <div class="bg-surface p-4">
+                    <p class="text-[0.65rem] tracking-[0.08em] text-ink-faint uppercase">{k.r}</p>
+                    <p class="num mt-1 text-2xl leading-none font-semibold">{k.v}</p>
+                    <p class="num mt-1 text-xs text-ink-faint">{k.d}</p>
+                  </div>
+                ))}
+              </div>
+
+              {jogador.awards.length > 0 && (
+                <div class="grid gap-4 lg:grid-cols-2">
+                  {jogador.awards.map((a) => {
+                    const alto = valorDe(a, a.high);
+                    const baixo = valorDe(a, a.low);
+                    return (
+                      <article class="flex flex-col gap-4 rounded-md border border-line bg-surface p-5">
+                        <header class="flex flex-col gap-2">
+                          <div class="flex items-center gap-2">
+                            <Selo tipo="fama" />
+                            <span class="num ml-auto text-lg font-semibold text-accent">
+                              {numero(a.ratio, 2)}×
+                            </span>
+                          </div>
+                          <h3 class="font-display text-xl font-bold text-balance">{a.title}</h3>
+                          <p class="text-sm text-ink-soft italic">“{a.verdict}”</p>
+                        </header>
+
+                        <div class="flex flex-col gap-3 border-t border-line pt-4">
+                          <p class="font-mono text-[0.65rem] tracking-[0.08em] text-ink-faint uppercase">
+                            {rotuloMetrica(a.stat)}
+                          </p>
+                          {[
+                            { lado: a.high, v: alto, destaque: true },
+                            { lado: a.low, v: baixo, destaque: false },
+                          ].map((linha) => (
+                            <div class="flex flex-col gap-1">
+                              <div class="flex items-baseline justify-between gap-3">
+                                <span
+                                  class:list={[
+                                    "text-sm",
+                                    linha.destaque ? "font-semibold text-ink" : "text-ink-soft",
+                                  ]}
+                                >
+                                  {rotuloBalde(linha.lado.bucket)}
+                                </span>
+                                <span class="shrink-0">
+                                  <span class="num text-sm font-semibold">{linha.v.valor}</span>
+                                  <span class="ml-1 text-xs text-ink-faint">{linha.v.unidade}</span>
+                                </span>
+                              </div>
+                              <div class="h-3.5 rounded-sm bg-sunk">
+                                <div
+                                  class:list={[
+                                    "h-full rounded-r-sm",
+                                    linha.destaque ? "bg-accent" : "bg-accent-ghost",
+                                  ]}
+                                  style={`width:${largura(a, linha.lado)}%`}
+                                />
+                              </div>
+                              <span class="num text-xs text-ink-faint">
+                                {brutoDe(a, linha.lado)}
+                              </span>
+                            </div>
+                          ))}
+                        </div>
+
+                        <details class="text-xs text-ink-faint">
+                          <summary class="cursor-pointer">Como este prêmio foi decidido</summary>
+                          <p class="mt-2">{a.criterion}</p>
+                        </details>
+
+                        <Compartilhar
+                          dados={cardDePremio(a, jogador.player_ref, jogador.display_name)}
+                        />
+                      </article>
+                    );
+                  })}
+                </div>
+              )}
+
+              {recortes.length > 0 && (
+                <section class="flex flex-col gap-3">
+                  <h3 class="font-display text-lg font-semibold">
+                    A mesma pessoa em contextos diferentes
+                  </h3>
+                  <div class="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+                    {recortes.map((b) => (
+                      <div class="flex flex-col gap-3 rounded-md border border-line bg-surface p-4">
+                        <div class="flex items-start justify-between gap-2">
+                          <div>
+                            <p class="font-semibold">{rotuloBalde(b.bucket)}</p>
+                            <p class="text-xs text-ink-faint">{rotuloEixo(b.axis ?? "")}</p>
+                          </div>
+                          <Selo tipo={b.sample_ok ? "ok" : "curta"} />
+                        </div>
+                        <dl class="grid grid-cols-2 gap-x-4 gap-y-2 text-sm">
+                          {[
+                            { r: "ADR", v: numero(b.adr) },
+                            { r: "K/D", v: numero(b.kd, 2) },
+                            { r: "1ª morte", v: porcento(b.first_death_rate) },
+                            { r: "Dano aliado", v: numero(b.team_damage_per_round, 2) },
+                          ].map((x) => (
+                            <div class="flex items-baseline justify-between gap-2">
+                              <dt class="text-xs text-ink-faint">{x.r}</dt>
+                              <dd class="num font-semibold">{x.v}</dd>
+                            </div>
+                          ))}
+                        </dl>
+                        <p class="num border-t border-line pt-2 text-xs text-ink-faint">
+                          {b.matches} part. · {b.rounds} rounds
+                        </p>
+                      </div>
+                    ))}
+                  </div>
+                </section>
+              )}
+
+              {jogador.notes.length > 0 && (
+                <details class="rounded-md border border-line bg-surface/50 p-5">
+                  <summary class="cursor-pointer text-sm text-ink-soft">
+                    Por que outros prêmios não saíram ({jogador.notes.length})
+                  </summary>
+                  <ul class="mt-3 flex flex-col gap-2 text-sm text-ink-faint">
+                    {jogador.notes.map((nota) => (
+                      <li>— {nota}</li>
+                    ))}
+                  </ul>
+                </details>
+              )}
+            </article>
+          );
+        })}
+      </div>
+    )
+  }
+</Base>
+
+<script>
+  import "../scripts/compartilhar.ts";
+</script>
+
+<script>
+  // Troca de jogador. Sem framework: esconder e mostrar seções já existentes.
+  const abas = document.querySelector("[data-abas]");
+  if (abas) {
+    for (const botao of abas.querySelectorAll<HTMLButtonElement>("button[data-aba]")) {
+      botao.addEventListener("click", () => {
+        const alvo = botao.dataset["aba"];
+        for (const outro of abas.querySelectorAll<HTMLButtonElement>("button[data-aba]")) {
+          outro.setAttribute("aria-pressed", String(outro === botao));
+        }
+        for (const painel of document.querySelectorAll<HTMLElement>("[data-painel]")) {
+          painel.hidden = painel.dataset["painel"] !== alvo;
+        }
+      });
+    }
+  }
+</script>

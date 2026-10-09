@@ -1,0 +1,12 @@
+---
+/** Erro de infraestrutura mostrado como aviso, nao como pagina em branco. */
+interface Props {
+  titulo: string;
+  detalhe: string;
+}
+const { titulo, detalhe } = Astro.props;
+---
+<div class="rounded-md border border-warn/40 bg-warn/10 p-5">
+  <p class="font-display text-lg font-semibold text-warn">{titulo}</p>
+  <p class="mt-1 text-sm text-ink-soft">{detalhe}</p>
+</div>

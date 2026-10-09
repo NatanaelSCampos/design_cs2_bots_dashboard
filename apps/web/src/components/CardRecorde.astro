@@ -1,0 +1,138 @@
+---
+import Avatar from "./Avatar.astro";
+import Compartilhar from "./Compartilhar.astro";
+import Ilustracao from "./Ilustracao.astro";
+import { nomeDeMapa } from "../lib/arte.ts";
+import { dataCurta, nomeDe, numero, valorHall } from "../lib/format.ts";
+import { cardDeRecorde } from "../lib/paraCard.ts";
+import { seloDeDestaque, seloDoCard } from "../lib/selos.ts";
+import { ilustracaoDe } from "../lib/ilustracao.ts";
+import logoMarca from "../assets/logo.webp";
+import type { HallEntry } from "@lobby/contracts";
+
+/**
+ * Card de um recorde do Hall.
+ *
+ * Os selos são IMAGENS do pacote entregue, não carimbos desenhados em CSS: a
+ * versão em CSS ficava lavada, com a borda errada e sem a textura de tinta.
+ */
+interface Props {
+  entrada: HallEntry;
+  /**
+   * Marca que esta atuação também é o recorde de todos os tempos.
+   *
+   * Só faz sentido num recorte: no Hall absoluto todo card é absoluto, e a
+   * marca em todos não informaria nada.
+   */
+  absoluto?: boolean;
+}
+const { entrada: e, absoluto = false } = Astro.props;
+
+const v = valorHall(e.value, e.unit, e.stat_unit);
+const nome = nomeDe(e.player_ref, e.display_name);
+const bruto = Number.isInteger(e.numerator) ? String(e.numerator) : numero(e.numerator);
+const destaque = seloDeDestaque(e.record_id);
+const selo = seloDoCard(e.record_id);
+---
+
+<article
+  class="relative flex flex-col gap-4 rounded-xl border border-line bg-surface p-5 transition-colors hover:border-accent/40"
+>
+  <header class="flex items-start gap-4">
+    <div class="relative shrink-0">
+      <Ilustracao chave={e.record_id} mapa={e.map_name} alt={e.title} />
+      {
+        destaque && (
+          <img
+            src={destaque.url}
+            alt=""
+            loading="lazy"
+            class="pointer-events-none absolute -top-5 -left-5 w-24 -rotate-[14deg] drop-shadow-lg sm:w-28"
+            aria-hidden="true"
+          />
+        )
+      }
+    </div>
+
+    <div class="flex min-w-0 flex-1 flex-col gap-2 pt-0.5">
+      <div class="flex items-start gap-3">
+        <h3 class="font-display text-xl leading-tight font-bold text-balance">{e.title}</h3>
+        {
+          selo && (
+            <img
+              src={selo.url}
+              alt=""
+              loading="lazy"
+              class="pointer-events-none -mt-3 ml-auto w-28 shrink-0 rotate-[7deg] sm:w-36"
+              aria-hidden="true"
+            />
+          )
+        }
+      </div>
+      {/*
+        Sem pílula de categoria: o selo em imagem no canto já diz o mesmo, e os
+        dois juntos apareciam em duplicata — um desenhado, um em texto.
+      */}
+      <p class="text-sm leading-snug text-ink-soft italic">“{e.blurb}”</p>
+    </div>
+  </header>
+
+  {/*
+    O número com a unidade ao lado. Antes mostrava "29,86" e o leitor não tinha
+    como saber de quê: a unidade existia no contrato e era descartada.
+  */}
+  {/*
+    A linha QUEBRA: número grande, unidade, marca de recorde e bruto não cabem
+    lado a lado na largura de um celular. Sem `flex-wrap` o card empurrava a
+    página inteira na horizontal.
+  */}
+  <div class="flex flex-wrap items-center gap-x-4 gap-y-2 border-y border-line py-3">
+    <div class="flex items-baseline gap-2">
+      <span class="font-body text-[2.6rem] leading-none font-bold tracking-tight text-ink">
+        {v.valor}
+      </span>
+      <span class="text-base text-ink-soft">{v.unidade}</span>
+    </div>
+    {
+      absoluto && (
+        <span class="shrink-0 rounded-sm border border-accent/60 px-2 py-0.5 font-mono text-[0.6rem] leading-relaxed tracking-[0.1em] text-accent uppercase">
+          recorde absoluto
+        </span>
+      )
+    }
+    <div class="ml-auto flex items-center gap-4">
+      {/* Separador só quando o bruto está na mesma linha do número. */}
+      <span class="hidden h-9 w-px shrink-0 bg-line sm:block"></span>
+      <span class="num shrink-0 text-sm text-ink-faint">{bruto} em {e.denominator} rounds</span>
+    </div>
+  </div>
+
+  <footer class="flex flex-wrap items-center gap-x-4 gap-y-3">
+    <a
+      class="flex items-center gap-3 hover:text-accent"
+      href={`/jogadores/${encodeURIComponent(e.player_ref)}`}
+    >
+      <Avatar nome={nome} semente={e.player_ref} tamanho="md" vazado />
+      <span class="font-display text-lg font-bold">{nome}</span>
+    </a>
+
+    <a
+      class="num ml-auto flex items-center gap-2 text-sm text-ink-faint hover:text-accent"
+      href={`/partidas/${encodeURIComponent(e.match_id)}`}
+    >
+      <svg viewBox="0 0 24 24" class="h-4 w-4 fill-ink-faint" aria-hidden="true">
+        <path
+          d="M14.2 2.6a1.9 1.9 0 1 1-3.8 0 1.9 1.9 0 0 1 3.8 0ZM9.4 6.1c-1 .3-1.7 1-2 2L6.6 11l-3.4.9a.9.9 0 0 0 .4 1.8l4-1a1 1 0 0 0 .7-.7l.4-1.4 1.5 3.3-2.6 3.3-2.2 3.4a1 1 0 0 0 1.7 1.1l2.2-3.3 2.4-3 1.6 3.4.5 3.1a1 1 0 0 0 2-.3l-.5-3.4a1 1 0 0 0-.1-.3l-2.2-4.6.8-3 1.1 1.6c.1.2.3.3.5.4l3.9 1a1 1 0 0 0 .5-1.8l-3.6-1-2-2.9a2.6 2.6 0 0 0-2.8-1l-1.6.4Z"
+        ></path>
+      </svg>
+      {nomeDeMapa(e.map_name)} · {dataCurta(e.started_at)} · {e.rounds}r
+    </a>
+  </footer>
+
+  <Compartilhar
+    dados={cardDeRecorde(e, undefined, absoluto)}
+    ilustracao={ilustracaoDe(e.record_id)}
+    selo={selo?.url}
+    logo={logoMarca.src}
+  />
+</article>

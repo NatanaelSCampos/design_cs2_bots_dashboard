@@ -1,0 +1,123 @@
+@import "tailwindcss";
+
+/*
+ * Identidade HALL — CS2 EDITION.
+ *
+ * Trocada em 2026-10-07: antes era ciano sobre azul-escuro. Agora é âmbar sobre
+ * marrom-preto quente, para combinar com o logo, o hero e as artes dos cards.
+ * O card PNG do Discord usa os mesmos valores, declarados em
+ * `packages/card/src/tabloide.ts` — se mudar aqui, muda lá.
+ */
+@theme {
+  /*
+   * Neutros FRIOS, quase sem matiz. A primeira tentativa usou marrom
+   * (#100c09 / #191310) e a página inteira ficou com cara de sépia: o âmbar
+   * deixou de ser destaque porque o fundo já era da mesma família. O âmbar é a
+   * única cor quente aqui, e é isso que faz ele saltar.
+   */
+  --color-ground: #0d0e10;
+  --color-surface: #17191d;
+  --color-sunk: #08090b;
+  --color-line: #282b31;
+  --color-ink: #eef0f2;
+  --color-ink-soft: #9aa0a8;
+  --color-ink-faint: #727880;
+
+  /* Âmbar do logo e da faixa "CS2 EDITION". */
+  --color-accent: #f5a524;
+  --color-accent-ghost: #3d2a0d;
+
+  /* Status. Reservadas: nunca usadas como cor de série nem de decoração. */
+  --color-ok: #6bbf7b;
+  --color-warn: #e5484d;
+
+  --font-display: "IBM Plex Sans Condensed", "Segoe UI", system-ui, sans-serif;
+  /* Anotações de caderno espalhadas pela página. */
+  --font-mao: "Caveat", "Segoe Script", cursive;
+  --font-body: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", Consolas, monospace;
+}
+
+html {
+  background: var(--color-ground);
+  color-scheme: dark;
+}
+
+body {
+  background: var(--color-ground);
+  color: var(--color-ink);
+  font-family: var(--font-body);
+}
+
+.num {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+}
+
+a {
+  color: inherit;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+/*
+ * Seção dos cards: fundo de COR SÓLIDA.
+ *
+ * As três tentativas com textura falharam pelo mesmo motivo — a imagem tingia a
+ * página inteira e competia com o conteúdo, e baixar a opacidade para resolver
+ * isso a tornava invisível. A graça agora vem dos elementos soltos nas margens
+ * (ver `Laterais.astro`), que deixam o centro limpo.
+ *
+ * O degradê no topo costura a seção à arte do banner, em vez de cortar seco.
+ */
+.secao-cards {
+  position: relative;
+  isolation: isolate;
+  background: var(--color-ground);
+}
+
+.secao-cards::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 14rem;
+  z-index: -1;
+  background: linear-gradient(to bottom, var(--color-sunk), var(--color-ground));
+}
+
+/* Anotação manuscrita, com inclinação própria por instância. */
+.anotacao {
+  font-family: var(--font-mao);
+  color: var(--color-ink-soft);
+  line-height: 1.15;
+  transform: rotate(var(--giro, -3deg));
+  text-wrap: balance;
+}
+
+/*
+ * Abas de recorte do Hall.
+ *
+ * O estado visual sai de `aria-selected`, não de uma classe paralela trocada
+ * pelo script: assim o que o leitor de tela anuncia e o que a tela mostra não
+ * podem divergir — só existe uma fonte de verdade para "qual aba está ativa".
+ */
+.aba-escopo {
+  color: var(--color-ink-soft);
+  cursor: pointer;
+  transition:
+    color 120ms ease,
+    background-color 120ms ease;
+}
+
+.aba-escopo:hover {
+  color: var(--color-ink);
+}
+
+.aba-escopo[aria-selected="true"] {
+  background: var(--color-accent);
+  color: var(--color-ground);
+  font-weight: 700;
+}

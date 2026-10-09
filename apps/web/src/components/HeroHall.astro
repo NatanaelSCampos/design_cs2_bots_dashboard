@@ -1,0 +1,74 @@
+---
+import { Image } from "astro:assets";
+import heroBanner from "../assets/hero-banner.webp";
+import { CATEGORIAS, FAMILIAS_VERGONHA } from "../lib/categorias.ts";
+
+/**
+ * Banner do topo do Hall.
+ *
+ * A arte entregue já traz **tudo** desenhado: logo, faixa "Arquivo dos Bagres",
+ * a chamada, as quatro famílias de vergonha, a anotação manuscrita, o carimbo
+ * CONFIDENCIAL e o bloco de conferência. Por isso aqui não há nenhuma camada de
+ * HTML por cima — a versão anterior recriava cada um desses elementos e eles
+ * apareciam em duplicata, fora de posição e com cor diferente da arte.
+ *
+ * O que sobra em HTML é só o que a imagem não consegue entregar:
+ *
+ *  - um `h1` de verdade, porque texto dentro de imagem não é cabeçalho para
+ *    leitor de tela nem para o documento;
+ *  - a chamada e as famílias repetidas **somente no celular**, onde a arte
+ *    reduzida deixa o texto pequeno demais para ler.
+ */
+---
+
+<section class="relative border-b border-line bg-ground">
+  <h1 class="sr-only">Hall — Arquivo dos Bagres</h1>
+
+  {/*
+    Sem recorte: esta arte já nasce em 3:1, que é a altura pedida, e traz TUDO
+    dentro do quadro. A versão anterior era 1,75:1 e eu cortava 50% dela com
+    `object-cover`, o que derrubava as quatro famílias para fora.
+  */}
+  <Image
+    src={heroBanner}
+    alt="Arquivo dos Bagres: um jogador mascarado caído no chão enquanto uma granada de luz explode acima dele, com uma galinha de óculos escuros ao lado. A chamada diz: aqui é onde os bots brilham."
+    width={2172}
+    height={724}
+    loading="eager"
+    class="w-full"
+  />
+
+  {/* Degradê curto para o banner nascer na seção abaixo em vez de cortar seco. */}
+  <div
+    class="pointer-events-none absolute inset-x-0 bottom-0 h-16 bg-gradient-to-b from-transparent to-ground"
+  >
+  </div>
+</section>
+
+{/*
+  Repetição apenas para telas estreitas. Chamada e famílias voltaram a caber
+  dentro da arte, então no desktop isto não aparece — seria o mesmo texto duas
+  vezes. No celular a arte reduz e o texto desenhado fica ilegível.
+*/}
+<div class="mx-auto max-w-7xl px-6 pt-6 md:hidden">
+  <p class="font-display text-2xl leading-tight font-bold text-balance">
+    Aqui é onde os bots brilham.
+  </p>
+  <p class="mt-1 text-ink-soft">Premiando os feitos mais duvidosos de uma única partida.</p>
+
+  <ul class="mt-4 flex flex-wrap gap-x-6 gap-y-2">
+    {
+      FAMILIAS_VERGONHA.map((chave) => {
+        const c = CATEGORIAS[chave];
+        return (
+          <li class="flex items-center gap-1.5 font-mono text-[0.6rem] leading-tight tracking-[0.08em] text-ink-faint uppercase">
+            <svg viewBox="0 0 24 24" class="h-3.5 w-3.5 shrink-0 fill-ink-faint/70" aria-hidden="true">
+              <path d={c.icone} />
+            </svg>
+            {c.rotulo}
+          </li>
+        );
+      })
+    }
+  </ul>
+</div>

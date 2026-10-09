@@ -1,0 +1,46 @@
+---
+import { iniciais, matizDe } from "../lib/arte.ts";
+
+/**
+ * Avatar do jogador, gerado a partir do nome.
+ *
+ * Não é foto: o avatar real da Steam exigiria buscar imagem de terceiro e
+ * expor a foto dos membros no site, o que é decisão do proprietário e não um
+ * detalhe de layout. Iniciais com matiz estável resolvem o que o avatar
+ * precisa resolver aqui — reconhecer de quem é o card ao passar o olho.
+ *
+ * A cor é derivada do `player_ref`, não do apelido: trocar o apelido no roster
+ * não muda a cor da pessoa.
+ */
+interface Props {
+  nome: string;
+  /** Usado como semente da cor, para ser estável a apelido trocado. */
+  semente: string;
+  tamanho?: "sm" | "md" | "lg";
+  /** Anel em vez de disco preenchido, como nas referências. */
+  vazado?: boolean;
+}
+const { nome, semente: chave, tamanho = "md", vazado = false } = Astro.props;
+const matiz = matizDe(chave);
+
+const dimensao = {
+  sm: "h-8 w-8 text-xs",
+  md: "h-11 w-11 text-sm",
+  lg: "h-16 w-16 text-xl",
+}[tamanho];
+---
+
+<span
+  class:list={[
+    dimensao,
+    "inline-flex shrink-0 items-center justify-center rounded-full font-semibold tracking-wide",
+  ]}
+  style={
+    vazado
+      ? `border: 2px solid oklch(0.62 0.10 ${matiz}); color: oklch(0.86 0.09 ${matiz});`
+      : `background: oklch(0.30 0.06 ${matiz}); color: oklch(0.86 0.09 ${matiz});`
+  }
+  aria-hidden="true"
+>
+  {iniciais(nome)}
+</span>

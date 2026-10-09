@@ -1,0 +1,2900 @@
+{
+  "valve:1000000000000000100": {
+    "match": {
+      "match_id": "valve:1000000000000000100",
+      "platform": "valve",
+      "platform_match_id": "1000000000000000100",
+      "identity_kind": "canonical",
+      "map_name": "de_dust2",
+      "started_at": "2026-10-09T00:45:42.000Z",
+      "rounds_played": 21,
+      "team_a_score": 13,
+      "team_b_score": 8,
+      "member_count": 3,
+      "player_count": 10,
+      "formula_version": "1.3.0",
+      "synthetic": false
+    },
+    "sources": [
+      {
+        "source_kind": "steam_auth_code",
+        "discovered_by": "steam:76561190000000010",
+        "source_ref": "match730_001000000000000000100_0413229798_201_competitive.dem",
+        "demo_sha256": "ba403f9354cd79a8e2e8b6f57884215597c1290ea87ee1fc45e8fdcf643a2047",
+        "first_seen_at": "2026-10-09T02:02:50.768Z"
+      }
+    ],
+    "events_key": "leagues/lobby-principal/matches/valve%3A1000000000000000100/events-v1.json.gz",
+    "events_bytes": 12448,
+    "players": [
+      {
+        "player_ref": "steam:76561190000000010",
+        "is_member": true,
+        "display_name": "Bagre",
+        "team": "team_a",
+        "rounds_played": 21,
+        "kills": 23,
+        "deaths": 12,
+        "assists": 4,
+        "damage_dealt": 3023
+      },
+      {
+        "player_ref": "steam:76561190000000011",
+        "is_member": true,
+        "display_name": "Rajada",
+        "team": "team_a",
+        "rounds_played": 21,
+        "kills": 18,
+        "deaths": 16,
+        "assists": 7,
+        "damage_dealt": 2631
+      },
+      {
+        "player_ref": "anon:074df54d4bbcd1e3",
+        "is_member": false,
+        "display_name": null,
+        "team": "team_b",
+        "rounds_played": 21,
+        "kills": 16,
+        "deaths": 11,
+        "assists": 4,
+        "damage_dealt": 2479
+      },
+      {
+        "player_ref": "anon:cdb1b8063c4b7918",
+        "is_member": false,
+        "display_name": null,
+        "team": "team_a",
+        "rounds_played": 21,
+        "kills": 17,
+        "deaths": 14,
+        "assists": 3,
+        "damage_dealt": 2340
+      },
+      {
+        "player_ref": "anon:e705ec433ddb0321",
+        "is_member": false,
+        "display_name": null,
+        "team": "team_b",
+        "rounds_played": 21,
+        "kills": 16,
+        "deaths": 17,
+        "assists": 3,
+        "damage_dealt": 2286
+      },
+      {
+        "player_ref": "steam:76561190000000012",
+        "is_member": true,
+        "display_name": "Pivete",
+        "team": "team_a",
+        "rounds_played": 21,
+        "kills": 10,
+        "deaths": 13,
+        "assists": 3,
+        "damage_dealt": 2193
+      },
+      {
+        "player_ref": "anon:30d70e462cfdc956",
+        "is_member": false,
+        "display_name": null,
+        "team": "team_b",
+        "rounds_played": 21,
+        "kills": 14,
+        "deaths": 20,
+        "assists": 4,
+        "damage_dealt": 2109
+      },
+      {
+        "player_ref": "anon:20a26ec1cf48f1fb",
+        "is_member": false,
+        "display_name": null,
+        "team": "team_a",
+        "rounds_played": 21,
+        "kills": 14,
+        "deaths": 15,
+        "assists": 4,
+        "damage_dealt": 1744
+      },
+      {
+        "player_ref": "anon:091cfb78978bd720",
+        "is_member": false,
+        "display_name": null,
+        "team": "team_b",
+        "rounds_played": 21,
+        "kills": 15,
+        "deaths": 16,
+        "assists": 1,
+        "damage_dealt": 1736
+      },
+      {
+        "player_ref": "anon:0424a2b0ac260ae0",
+        "is_member": false,
+        "display_name": null,
+        "team": "team_b",
+        "rounds_played": 21,
+        "kills": 5,
+        "deaths": 18,
+        "assists": 4,
+        "damage_dealt": 903
+      }
+    ],
+    "metrics": [
+      {
+        "metric_id": "first_death_rate",
+        "formula_version": "1.3.0",
+        "player_ref": "anon:0424a2b0ac260ae0",
+        "value": 0.19047619047619047,
+        "numerator": 4,
+        "denominator": 21,
+        "min_sample": 10,
+        "sample_ok": true
+      },
+      {
+        "metric_id": "first_death_rate",
+        "formula_version": "1.3.0",
+        "player_ref": "anon:074df54d4bbcd1e3",
+        "value": 0,
+        "numerator": 0,
+        "denominator": 21,
+        "min_sample": 10,
+        "sample_ok": true
+      },
+      {
+        "metric_id": "first_death_rate",
+        "formula_version": "1.3.0",
+        "player_ref": "anon:091cfb78978bd720",
+        "value": 0.19047619047619047,
+        "numerator": 4,
+        "denominator": 21,
+        "min_sample": 10,
+        "sample_ok": true
+      },
+      {
+        "metric_id": "first_death_rate",
+        "formula_version": "1.3.0",
+        "player_ref": "anon:20a26ec1cf48f1fb",
+        "value": 0.3333333333333333,
+        "numerator": 7,
+        "denominator": 21,
+        "min_sample": 10,
+        "sample_ok": true
+      },
+      {
+        "metric_id": "first_death_rate",
+        "formula_version": "1.3.0",
+        "player_ref": "anon:30d70e462cfdc956",
+        "value": 0.3333333333333333,
+        "numerator": 7,
+        "denominator": 21,
+        "min_sample": 10,
+        "sample_ok": true
+      },
+      {
+        "metric_id": "first_death_rate",
+        "formula_version": "1.3.0",
+        "player_ref": "anon:cdb1b8063c4b7918",
+        "value": 0.2857142857142857,
+        "numerator": 6,
+        "denominator": 21,
+        "min_sample": 10,
+        "sample_ok": true
+      },
+      {
+        "metric_id": "first_death_rate",
+        "formula_version": "1.3.0",
+        "player_ref": "anon:e705ec433ddb0321",
+        "value": 0.23809523809523808,
+        "numerator": 5,
+        "denominator": 21,
+        "min_sample": 10,
+        "sample_ok": true
+      },
+      {
+        "metric_id": "first_death_rate",
+        "formula_version": "1.3.0",
+        "player_ref": "steam:76561190000000010",
+        "value": 0.047619047619047616,
+        "numerator": 1,
+        "denominator": 21,
+        "min_sample": 10,
+        "sample_ok": true
+      },
+      {
+        "metric_id": "first_death_rate",
+        "formula_version": "1.3.0",
+        "player_ref": "steam:76561190000000011",
+        "value": 0.19047619047619047,
+        "numerator": 4,
+        "denominator": 21,
+        "min_sample": 10,
+        "sample_ok": true
+      },
+      {
+        "metric_id": "first_death_rate",
+        "formula_version": "1.3.0",
+        "player_ref": "steam:76561190000000012",
+        "value": 0.09523809523809523,
+        "numerator": 2,
+        "denominator": 21,
+        "min_sample": 10,
+        "sample_ok": true
+      },
+      {
+        "metric_id": "friendly_flash_per_round",
+        "formula_version": "1.3.0",
+        "player_ref": "anon:0424a2b0ac260ae0",
+        "value": 0.09199119749523345,
+        "numerator": 1.9318151473999023,
+        "denominator": 21,
+        "min_sample": 10,
+        "sample_ok": true
+      },
+      {
+        "metric_id": "friendly_flash_per_round",
+        "formula_version": "1.3.0",
+        "player_ref": "anon:074df54d4bbcd1e3",
+        "value": 0.12902710551307314,
+        "numerator": 2.709569215774536,
+        "denominator": 21,
+        "min_sample": 10,
+        "sample_ok": true
+      },
+      {
+        "metric_id": "friendly_flash_per_round",
+        "formula_version": "1.3.0",
+        "player_ref": "anon:091cfb78978bd720",
+        "value": 0.37395223833265756,
+        "numerator": 7.852997004985809,
+        "denominator": 21,
+        "min_sample": 10,
+        "sample_ok": true
+      },
+      {
+        "metric_id": "friendly_flash_per_round",
+        "formula_version": "1.3.0",
+        "player_ref": "anon:20a26ec1cf48f1fb",
+        "value": 0,
+        "numerator": 0,
+        "denominator": 21,
+        "min_sample": 10,
+        "sample_ok": true
+      },
+      {
+        "metric_id": "friendly_flash_per_round",
+        "formula_version": "1.3.0",
+        "player_ref": "anon:30d70e462cfdc956",
+        "value": 0.2337282427719661,
+        "numerator": 4.9082930982112885,
+        "denominator": 21,
+        "min_sample": 10,
+        "sample_ok": true
+      },
+      {
+        "metric_id": "friendly_flash_per_round",
+        "formula_version": "1.3.0",
+        "player_ref": "anon:cdb1b8063c4b7918",
+        "value": 0.4245667230515253,
+        "numerator": 8.915901184082031,
+        "denominator": 21,
+        "min_sample": 10,
+        "sample_ok": true
+      },
+      {
+        "metric_id": "friendly_flash_per_round",
+        "formula_version": "1.3.0",
+        "player_ref": "anon:e705ec433ddb0321",
+        "value": 0.187020229441779,
+        "numerator": 3.927424818277359,
+        "denominator": 21,
+        "min_sample": 10,
+        "sample_ok": true
+      },
+      {
+        "metric_id": "friendly_flash_per_round",
+        "formula_version": "1.3.0",
+        "player_ref": "steam:76561190000000010",
+        "value": 0.41615846043541316,
+        "numerator": 8.739327669143677,
+        "denominator": 21,
+        "min_sample": 10,
+        "sample_ok": true
+      },
+      {
+        "metric_id": "friendly_flash_per_round",
+        "formula_version": "1.3.0",
+        "player_ref": "steam:76561190000000011",
+        "value": 0.8231061391887211,
+        "numerator": 17.285228922963142,
+        "denominator": 21,
+        "min_sample": 10,
+        "sample_ok": true
+      },
+      {
+        "metric_id": "friendly_flash_per_round",
+        "formula_version": "1.3.0",
+        "player_ref": "steam:76561190000000012",
+        "value": 0.02628791616076515,
+        "numerator": 0.5520462393760681,
+        "denominator": 21,
+        "min_sample": 10,
+        "sample_ok": true
+      },
+      {
+        "metric_id": "team_damage_per_round",
+        "formula_version": "1.3.0",
+        "player_ref": "anon:0424a2b0ac260ae0",
+        "value": 0,
+        "numerator": 0,
+        "denominator": 21,
+        "min_sample": 10,
+        "sample_ok": true
+      },
+      {
+        "metric_id": "team_damage_per_round",
+        "formula_version": "1.3.0",
+        "player_ref": "anon:074df54d4bbcd1e3",
+        "value": 0,
+        "numerator": 0,
+        "denominator": 21,
+        "min_sample": 10,
+        "sample_ok": true
+      },
+      {
+        "metric_id": "team_damage_per_round",
+        "formula_version": "1.3.0",
+        "player_ref": "anon:091cfb78978bd720",
+        "value": 0,
+        "numerator": 0,
+        "denominator": 21,
+        "min_sample": 10,
+        "sample_ok": true
+      },
+      {
+        "metric_id": "team_damage_per_round",
+        "formula_version": "1.3.0",
+        "player_ref": "anon:20a26ec1cf48f1fb",
+        "value": 0,
+        "numerator": 0,
+        "denominator": 21,
+        "min_sample": 10,
+        "sample_ok": true
+      },
+      {
+        "metric_id": "team_damage_per_round",
+        "formula_version": "1.3.0",
+        "player_ref": "anon:30d70e462cfdc956",
+        "value": 0.6190476190476191,
+        "numerator": 13,
+        "denominator": 21,
+        "min_sample": 10,
+        "sample_ok": true
+      },
+      {
+        "metric_id": "team_damage_per_round",
+        "formula_version": "1.3.0",
+        "player_ref": "anon:cdb1b8063c4b7918",
+        "value": 0,
+        "numerator": 0,
+        "denominator": 21,
+        "min_sample": 10,
+        "sample_ok": true
+      },
+      {
+        "metric_id": "team_damage_per_round",
+        "formula_version": "1.3.0",
+        "player_ref": "anon:e705ec433ddb0321",
+        "value": 0,
+        "numerator": 0,
+        "denominator": 21,
+        "min_sample": 10,
+        "sample_ok": true
+      },
+      {
+        "metric_id": "team_damage_per_round",
+        "formula_version": "1.3.0",
+        "player_ref": "steam:76561190000000010",
+        "value": 0,
+        "numerator": 0,
+        "denominator": 21,
+        "min_sample": 10,
+        "sample_ok": true
+      },
+      {
+        "metric_id": "team_damage_per_round",
+        "formula_version": "1.3.0",
+        "player_ref": "steam:76561190000000011",
+        "value": 0,
+        "numerator": 0,
+        "denominator": 21,
+        "min_sample": 10,
+        "sample_ok": true
+      },
+      {
+        "metric_id": "team_damage_per_round",
+        "formula_version": "1.3.0",
+        "player_ref": "steam:76561190000000012",
+        "value": 0.42857142857142855,
+        "numerator": 9,
+        "denominator": 21,
+        "min_sample": 10,
+        "sample_ok": true
+      }
+    ],
+    "awards": [
+      {
+        "award_id": "cegador-de-amigos",
+        "metric_id": "friendly_flash_per_round",
+        "formula_version": "1.3.0",
+        "winner_ref": "steam:76561190000000011",
+        "value": 0.8231061391887211,
+        "numerator": 17.285228922963142,
+        "denominator": 21,
+        "criterion": "Segundos de cegueira causados em companheiros de time, por round jogado. Cegar a si mesmo nao conta. Minimo de 10 rounds e 2 membros elegiveis.",
+        "tied_with": [
+          "steam:76561190000000011"
+        ]
+      },
+      {
+        "award_id": "perigo-interno",
+        "metric_id": "team_damage_per_round",
+        "formula_version": "1.3.0",
+        "winner_ref": "steam:76561190000000012",
+        "value": 0.42857142857142855,
+        "numerator": 9,
+        "denominator": 21,
+        "criterion": "Dano de vida causado em companheiros de time, por round jogado. Dano em si mesmo nao conta. Minimo de 10 rounds e 2 membros elegiveis.",
+        "tied_with": [
+          "steam:76561190000000012"
+        ]
+      },
+      {
+        "award_id": "primeiro-a-cair",
+        "metric_id": "first_death_rate",
+        "formula_version": "1.3.0",
+        "winner_ref": "steam:76561190000000011",
+        "value": 0.19047619047619047,
+        "numerator": 4,
+        "denominator": 21,
+        "criterion": "Proporcao de rounds em que o jogador foi a primeira morte do proprio time. Numerador: rounds em que morreu antes de qualquer companheiro de lado. Denominador: rounds jogados. Minimo de 10 rounds para concorrer e 2 membros elegiveis para haver premio.",
+        "tied_with": [
+          "steam:76561190000000011"
+        ]
+      }
+    ]
+  },
+  "valve:1000000000000000102": {
+    "match": {
+      "match_id": "valve:1000000000000000102",
+      "platform": "valve",
+      "platform_match_id": "1000000000000000102",
+      "identity_kind": "canonical",
+      "map_name": "de_dust2",
+      "started_at": "2026-10-09T00:04:12.000Z",
+      "rounds_played": 24,
+      "team_a_score": 13,
+      "team_b_score": 11,
+      "member_count": 3,
+      "player_count": 10,
+      "formula_version": "1.3.0",
+      "synthetic": false
+    },
+    "sources": [
+      {
+        "source_kind": "steam_auth_code",
+        "discovered_by": "steam:76561190000000010",
+        "source_ref": "match730_001000000000000000102_1193372196_201_competitive.dem",
+        "demo_sha256": "69f255e5f2c52f63e90400583994c7aa9fe88e251fff606cac1294f627198bb4",
+        "first_seen_at": "2026-10-09T01:01:46.870Z"
+      }
+    ],
+    "events_key": "leagues/lobby-principal/matches/valve%3A1000000000000000102/events-v1.json.gz",
+    "events_bytes": 16383,
+    "players": [
+      {
+        "player_ref": "anon:e4023d375beca92d",
+        "is_member": false,
+        "display_name": null,
+        "team": "team_a",
+        "rounds_played": 24,
+        "kills": 24,
+        "deaths": 19,
+        "assists": 9,
+        "damage_dealt": 3401
+      },
+      {
+        "player_ref": "steam:76561190000000011",
+        "is_member": true,
+        "display_name": "Rajada",
+        "team": "team_b",
+        "rounds_played": 24,
+        "kills": 20,
+        "deaths": 20,
+        "assists": 10,
+        "damage_dealt": 3399
+      },
+      {
+        "player_ref": "anon:2c25faceb6fdbd45",
+        "is_member": false,
+        "display_name": null,
+        "team": "team_a",
+        "rounds_played": 24,
+        "kills": 24,
+        "deaths": 14,
+        "assists": 5,
+        "damage_dealt": 3274
+      },
+      {
+        "player_ref": "anon:110451be9105d855",
+        "is_member": false,
+        "display_name": null,
+        "team": "team_b",
+        "rounds_played": 24,
+        "kills": 21,
+        "deaths": 24,
+        "assists": 4,
+        "damage_dealt": 2828
+      },
+      {
+        "player_ref": "anon:58c0c4e824a45233",
+        "is_member": false,
+        "display_name": null,
+        "team": "team_a",
+        "rounds_played": 24,
+        "kills": 16,
+        "deaths": 18,
+        "assists": 5,
+        "damage_dealt": 2639
+      },
+      {
+        "player_ref": "anon:3bb8489228d5cdb9",
+        "is_member": false,
+        "display_name": null,
+        "team": "team_a",
+        "rounds_played": 24,
+        "kills": 17,
+        "deaths": 18,
+        "assists": 5,
+        "damage_dealt": 2588
+      },
+      {
+        "player_ref": "steam:76561190000000012",
+        "is_member": true,
+        "display_name": "Pivete",
+        "team": "team_b",
+        "rounds_played": 24,
+        "kills": 16,
+        "deaths": 16,
+        "assists": 4,
+        "damage_dealt": 2378
+      },
+      {
+        "player_ref": "steam:76561190000000010",
+        "is_member": true,
+        "display_name": "Bagre",
+        "team": "team_b",
+        "rounds_played": 24,
+        "kills": 12,
+        "deaths": 18,
+        "assists": 5,
+        "damage_dealt": 1932
+      },
+      {
+        "player_ref": "anon:cd7d876855f9f9c3",
+        "is_member": false,
+        "display_name": null,
+        "team": "team_b",
+        "rounds_played": 24,
+        "kills": 13,
+        "deaths": 17,
+        "assists": 6,
+        "damage_dealt": 1714
+      },
+      {
+        "player_ref": "anon:8992864d1475c36c",
+        "is_member": false,
+        "display_name": null,
+        "team": "team_a",
+        "rounds_played": 24,
+        "kills": 13,
+        "deaths": 18,
+        "assists": 4,
+        "damage_dealt": 1711
+      }
+    ],
+    "metrics": [
+      {
+        "metric_id": "first_death_rate",
+        "formula_version": "1.3.0",
+        "player_ref": "anon:110451be9105d855",
+        "value": 0.375,
+        "numerator": 9,
+        "denominator": 24,
+        "min_sample": 10,
+        "sample_ok": true
+      },
+      {
+        "metric_id": "first_death_rate",
+        "formula_version": "1.3.0",
+        "player_ref": "anon:2c25faceb6fdbd45",
+        "value": 0.16666666666666666,
+        "numerator": 4,
+        "denominator": 24,
+        "min_sample": 10,
+        "sample_ok": true
+      },
+      {
+        "metric_id": "first_death_rate",
+        "formula_version": "1.3.0",
+        "player_ref": "anon:3bb8489228d5cdb9",
+        "value": 0.20833333333333334,
+        "numerator": 5,
+        "denominator": 24,
+        "min_sample": 10,
+        "sample_ok": true
+      },
+      {
+        "metric_id": "first_death_rate",
+        "formula_version": "1.3.0",
+        "player_ref": "anon:58c0c4e824a45233",
+        "value": 0.08333333333333333,
+        "numerator": 2,
+        "denominator": 24,
+        "min_sample": 10,
+        "sample_ok": true
+      },
+      {
+        "metric_id": "first_death_rate",
+        "formula_version": "1.3.0",
+        "player_ref": "anon:8992864d1475c36c",
+        "value": 0.25,
+        "numerator": 6,
+        "denominator": 24,
+        "min_sample": 10,
+        "sample_ok": true
+      },
+      {
+        "metric_id": "first_death_rate",
+        "formula_version": "1.3.0",
+        "player_ref": "anon:cd7d876855f9f9c3",
+        "value": 0.041666666666666664,
+        "numerator": 1,
+        "denominator": 24,
+        "min_sample": 10,
+        "sample_ok": true
+      },
+      {
+        "metric_id": "first_death_rate",
+        "formula_version": "1.3.0",
+        "player_ref": "anon:e4023d375beca92d",
+        "value": 0.2916666666666667,
+        "numerator": 7,
+        "denominator": 24,
+        "min_sample": 10,
+        "sample_ok": true
+      },
+      {
+        "metric_id": "first_death_rate",
+        "formula_version": "1.3.0",
+        "player_ref": "steam:76561190000000010",
+        "value": 0.2916666666666667,
+        "numerator": 7,
+        "denominator": 24,
+        "min_sample": 10,
+        "sample_ok": true
+      },
+      {
+        "metric_id": "first_death_rate",
+        "formula_version": "1.3.0",
+        "player_ref": "steam:76561190000000011",
+        "value": 0.125,
+        "numerator": 3,
+        "denominator": 24,
+        "min_sample": 10,
+        "sample_ok": true
+      },
+      {
+        "metric_id": "first_death_rate",
+        "formula_version": "1.3.0",
+        "player_ref": "steam:76561190000000012",
+        "value": 0.16666666666666666,
+        "numerator": 4,
+        "denominator": 24,
+        "min_sample": 10,
+        "sample_ok": true
+      },
+      {
+        "metric_id": "friendly_flash_per_round",
+        "formula_version": "1.3.0",
+        "player_ref": "anon:110451be9105d855",
+        "value": 0,
+        "numerator": 0,
+        "denominator": 24,
+        "min_sample": 10,
+        "sample_ok": true
+      },
+      {
+        "metric_id": "friendly_flash_per_round",
+        "formula_version": "1.3.0",
+        "player_ref": "anon:2c25faceb6fdbd45",
+        "value": 3.626822623113791,
+        "numerator": 87.04374295473099,
+        "denominator": 24,
+        "min_sample": 10,
+        "sample_ok": true
+      },
+      {
+        "metric_id": "friendly_flash_per_round",
+        "formula_version": "1.3.0",
+        "player_ref": "anon:3bb8489228d5cdb9",
+        "value": 0.14977072676022848,
+        "numerator": 3.5944974422454834,
+        "denominator": 24,
+        "min_sample": 10,
+        "sample_ok": true
+      },
+      {
+        "metric_id": "friendly_flash_per_round",
+        "formula_version": "1.3.0",
+        "player_ref": "anon:58c0c4e824a45233",
+        "value": 1.0354034900665283,
+        "numerator": 24.84968376159668,
+        "denominator": 24,
+        "min_sample": 10,
+        "sample_ok": true
+      },
+      {
+        "metric_id": "friendly_flash_per_round",
+        "formula_version": "1.3.0",
+        "player_ref": "anon:8992864d1475c36c",
+        "value": 0.29523635283112526,
+        "numerator": 7.085672467947006,
+        "denominator": 24,
+        "min_sample": 10,
+        "sample_ok": true
+      },
+      {
+        "metric_id": "friendly_flash_per_round",
+        "formula_version": "1.3.0",
+        "player_ref": "anon:cd7d876855f9f9c3",
+        "value": 0.7986464699109396,
+        "numerator": 19.16751527786255,
+        "denominator": 24,
+        "min_sample": 10,
+        "sample_ok": true
+      },
+      {
+        "metric_id": "friendly_flash_per_round",
+        "formula_version": "1.3.0",
+        "player_ref": "anon:e4023d375beca92d",
+        "value": 0.841389055053393,
+        "numerator": 20.193337321281433,
+        "denominator": 24,
+        "min_sample": 10,
+        "sample_ok": true
+      },
+      {
+        "metric_id": "friendly_flash_per_round",
+        "formula_version": "1.3.0",
+        "player_ref": "steam:76561190000000010",
+        "value": 0.16977804154157639,
+        "numerator": 4.074672996997833,
+        "denominator": 24,
+        "min_sample": 10,
+        "sample_ok": true
+      },
+      {
+        "metric_id": "friendly_flash_per_round",
+        "formula_version": "1.3.0",
+        "player_ref": "steam:76561190000000011",
+        "value": 0.8823339467247328,
+        "numerator": 21.176014721393585,
+        "denominator": 24,
+        "min_sample": 10,
+        "sample_ok": true
+      },
+      {
+        "metric_id": "friendly_flash_per_round",
+        "formula_version": "1.3.0",
+        "player_ref": "steam:76561190000000012",
+        "value": 0.07240072637796402,
+        "numerator": 1.7376174330711365,
+        "denominator": 24,
+        "min_sample": 10,
+        "sample_ok": true
+      },
+      {
+        "metric_id": "team_damage_per_round",
+        "formula_version": "1.3.0",
+        "player_ref": "anon:110451be9105d855",
+        "value": 0,
+        "numerator": 0,
+        "denominator": 24,
+        "min_sample": 10,
+        "sample_ok": true
+      },
+      {
+        "metric_id": "team_damage_per_round",
+        "formula_version": "1.3.0",
+        "player_ref": "anon:2c25faceb6fdbd45",
+        "value": 0.6666666666666666,
+        "numerator": 16,
+        "denominator": 24,
+        "min_sample": 10,
+        "sample_ok": true
+      },
+      {
+        "metric_id": "team_damage_per_round",
+        "formula_version": "1.3.0",
+        "player_ref": "anon:3bb8489228d5cdb9",
+        "value": 0,
+        "numerator": 0,
+        "denominator": 24,
+        "min_sample": 10,
+        "sample_ok": true
+      },
+      {
+        "metric_id": "team_damage_per_round",
+        "formula_version": "1.3.0",
+        "player_ref": "anon:58c0c4e824a45233",
+        "value": 0,
+        "numerator": 0,
+        "denominator": 24,
+        "min_sample": 10,
+        "sample_ok": true
+      },
+      {
+        "metric_id": "team_damage_per_round",
+        "formula_version": "1.3.0",
+        "player_ref": "anon:8992864d1475c36c",
+        "value": 0,
+        "numerator": 0,
+        "denominator": 24,
+        "min_sample": 10,
+        "sample_ok": true
+      },
+      {
+        "metric_id": "team_damage_per_round",
+        "formula_version": "1.3.0",
+        "player_ref": "anon:cd7d876855f9f9c3",
+        "value": 0,
+        "numerator": 0,
+        "denominator": 24,
+        "min_sample": 10,
+        "sample_ok": true
+      },
+      {
+        "metric_id": "team_damage_per_round",
+        "formula_version": "1.3.0",
+        "player_ref": "anon:e4023d375beca92d",
+        "value": 2.0416666666666665,
+        "numerator": 49,
+        "denominator": 24,
+        "min_sample": 10,
+        "sample_ok": true
+      },
+      {
+        "metric_id": "team_damage_per_round",
+        "formula_version": "1.3.0",
+        "player_ref": "steam:76561190000000010",
+        "value": 0,
+        "numerator": 0,
+        "denominator": 24,
+        "min_sample": 10,
+        "sample_ok": true
+      },
+      {
+        "metric_id": "team_damage_per_round",
+        "formula_version": "1.3.0",
+        "player_ref": "steam:76561190000000011",
+        "value": 0.375,
+        "numerator": 9,
+        "denominator": 24,
+        "min_sample": 10,
+        "sample_ok": true
+      },
+      {
+        "metric_id": "team_damage_per_round",
+        "formula_version": "1.3.0",
+        "player_ref": "steam:76561190000000012",
+        "value": 1.7083333333333333,
+        "numerator": 41,
+        "denominator": 24,
+        "min_sample": 10,
+        "sample_ok": true
+      }
+    ],
+    "awards": [
+      {
+        "award_id": "cegador-de-amigos",
+        "metric_id": "friendly_flash_per_round",
+        "formula_version": "1.3.0",
+        "winner_ref": "steam:76561190000000011",
+        "value": 0.8823339467247328,
+        "numerator": 21.176014721393585,
+        "denominator": 24,
+        "criterion": "Segundos de cegueira causados em companheiros de time, por round jogado. Cegar a si mesmo nao conta. Minimo de 10 rounds e 2 membros elegiveis.",
+        "tied_with": [
+          "steam:76561190000000011"
+        ]
+      },
+      {
+        "award_id": "perigo-interno",
+        "metric_id": "team_damage_per_round",
+        "formula_version": "1.3.0",
+        "winner_ref": "steam:76561190000000012",
+        "value": 1.7083333333333333,
+        "numerator": 41,
+        "denominator": 24,
+        "criterion": "Dano de vida causado em companheiros de time, por round jogado. Dano em si mesmo nao conta. Minimo de 10 rounds e 2 membros elegiveis.",
+        "tied_with": [
+          "steam:76561190000000012"
+        ]
+      },
+      {
+        "award_id": "primeiro-a-cair",
+        "metric_id": "first_death_rate",
+        "formula_version": "1.3.0",
+        "winner_ref": "steam:76561190000000010",
+        "value": 0.2916666666666667,
+        "numerator": 7,
+        "denominator": 24,
+        "criterion": "Proporcao de rounds em que o jogador foi a primeira morte do proprio time. Numerador: rounds em que morreu antes de qualquer companheiro de lado. Denominador: rounds jogados. Minimo de 10 rounds para concorrer e 2 membros elegiveis para haver premio.",
+        "tied_with": [
+          "steam:76561190000000010"
+        ]
+      }
+    ]
+  },
+  "valve:1000000000000000104": {
+    "match": {
+      "match_id": "valve:1000000000000000104",
+      "platform": "valve",
+      "platform_match_id": "1000000000000000104",
+      "identity_kind": "canonical",
+      "map_name": "de_dust2",
+      "started_at": "2026-10-08T00:24:54.000Z",
+      "rounds_played": 21,
+      "team_a_score": 8,
+      "team_b_score": 13,
+      "member_count": 4,
+      "player_count": 10,
+      "formula_version": "1.3.0",
+      "synthetic": false
+    },
+    "sources": [
+      {
+        "source_kind": "steam_auth_code",
+        "discovered_by": "steam:76561190000000010",
+        "source_ref": "match730_001000000000000000104_0397464020_201_competitive.dem",
+        "demo_sha256": "8ae5c3d3127eb3778b6357b4df8864c31d8486a85aa96252d7f565294da174d5",
+        "first_seen_at": "2026-10-08T09:50:00.911Z"
+      }
+    ],
+    "events_key": "leagues/lobby-principal/matches/valve%3A1000000000000000104/events-v1.json.gz",
+    "events_bytes": 13051,
+    "players": [
+      {
+        "player_ref": "anon:edea2b31b4109de0",
+        "is_member": false,
+        "display_name": null,
+        "team": "team_b",
+        "rounds_played": 21,
+        "kills": 25,
+        "deaths": 15,
+        "assists": 4,
+        "damage_dealt": 3009
+      },
+      {
+        "player_ref": "anon:e6ee7b19a4cea2ff",
+        "is_member": false,
+        "display_name": null,
+        "team": "team_b",
+        "rounds_played": 21,
+        "kills": 20,
+        "deaths": 14,
+        "assists": 0,
+        "damage_dealt": 2742
+      },
+      {
+        "player_ref": "steam:76561190000000010",
+        "is_member": true,
+        "display_name": "Bagre",
+        "team": "team_a",
+        "rounds_played": 21,
+        "kills": 14,
+        "deaths": 16,
+        "assists": 4,
+        "damage_dealt": 2188
+      },
+      {
+        "player_ref": "anon:70b553d7d11c7834",
+        "is_member": false,
+        "display_name": null,
+        "team": "team_b",
+        "rounds_played": 21,
+        "kills": 15,
+        "deaths": 14,
+        "assists": 6,
+        "damage_dealt": 2180
+      },
+      {
+        "player_ref": "steam:76561190000000012",
+        "is_member": true,
+        "display_name": "Pivete",
+        "team": "team_a",
+        "rounds_played": 21,
+        "kills": 17,
+        "deaths": 17,
+        "assists": 4,
+        "damage_dealt": 2139
+      },
+      {
+        "player_ref": "anon:e87c83e1bd60669b",
+        "is_member": false,
+        "display_name": null,
+        "team": "team_a",
+        "rounds_played": 19,
+        "kills": 11,
+        "deaths": 15,
+        "assists": 3,
+        "damage_dealt": 1839
+      },
+      {
+        "player_ref": "anon:c5465ee310e3de5c",
+        "is_member": false,
+        "display_name": null,
+        "team": "team_b",
+        "rounds_played": 21,
+        "kills": 12,
+        "deaths": 11,
+        "assists": 3,
+        "damage_dealt": 1720
+      },
+      {
+        "player_ref": "anon:7012abc970f51fcf",
+        "is_member": false,
+        "display_name": null,
+        "team": "team_b",
+        "rounds_played": 21,
+        "kills": 10,
+        "deaths": 13,
+        "assists": 6,
+        "damage_dealt": 1668
+      },
+      {
+        "player_ref": "steam:76561190000000013",
+        "is_member": true,
+        "display_name": "Zarolho",
+        "team": "team_a",
+        "rounds_played": 21,
+        "kills": 10,
+        "deaths": 17,
+        "assists": 4,
+        "damage_dealt": 1476
+      },
+      {
+        "player_ref": "steam:76561190000000011",
+        "is_member": true,
+        "display_name": "Rajada",
+        "team": "team_a",
+        "rounds_played": 21,
+        "kills": 9,
+        "deaths": 18,
+        "assists": 7,
+        "damage_dealt": 1318
+      }
+    ],
+    "metrics": [
+      {
+        "metric_id": "first_death_rate",
+        "formula_version": "1.3.0",
+        "player_ref": "anon:7012abc970f51fcf",
+        "value": 0.14285714285714285,
+        "numerator": 3,
+        "denominator": 21,
+        "min_sample": 10,
+        "sample_ok": true
+      },
+      {
+        "metric_id": "first_death_rate",
+        "formula_version": "1.3.0",
+        "player_ref": "anon:70b553d7d11c7834",
+        "value": 0.09523809523809523,
+        "numerator": 2,
+        "denominator": 21,
+        "min_sample": 10,
+        "sample_ok": true
+      },
+      {
+        "metric_id": "first_death_rate",
+        "formula_version": "1.3.0",
+        "player_ref": "anon:c5465ee310e3de5c",
+        "value": 0.047619047619047616,
+        "numerator": 1,
+        "denominator": 21,
+        "min_sample": 10,
+        "sample_ok": true
+      },
+      {
+        "metric_id": "first_death_rate",
+        "formula_version": "1.3.0",
+        "player_ref": "anon:e6ee7b19a4cea2ff",
+        "value": 0.2857142857142857,
+        "numerator": 6,
+        "denominator": 21,
+        "min_sample": 10,
+        "sample_ok": true
+      },
+      {
+        "metric_id": "first_death_rate",
+        "formula_version": "1.3.0",
+        "player_ref": "anon:e87c83e1bd60669b",
+        "value": 0.2631578947368421,
+        "numerator": 5,
+        "denominator": 19,
+        "min_sample": 10,
+        "sample_ok": true
+      },
+      {
+        "metric_id": "first_death_rate",
+        "formula_version": "1.3.0",
+        "player_ref": "anon:edea2b31b4109de0",
+        "value": 0.23809523809523808,
+        "numerator": 5,
+        "denominator": 21,
+        "min_sample": 10,
+        "sample_ok": true
+      },
+      {
+        "metric_id": "first_death_rate",
+        "formula_version": "1.3.0",
+        "player_ref": "steam:76561190000000010",
+        "value": 0.19047619047619047,
+        "numerator": 4,
+        "denominator": 21,
+        "min_sample": 10,
+        "sample_ok": true
+      },
+      {
+        "metric_id": "first_death_rate",
+        "formula_version": "1.3.0",
+        "player_ref": "steam:76561190000000011",
+        "value": 0.14285714285714285,
+        "numerator": 3,
+        "denominator": 21,
+        "min_sample": 10,
+        "sample_ok": true
+      },
+      {
+        "metric_id": "first_death_rate",
+        "formula_version": "1.3.0",
+        "player_ref": "steam:76561190000000013",
+        "value": 0.09523809523809523,
+        "numerator": 2,
+        "denominator": 21,
+        "min_sample": 10,
+        "sample_ok": true
+      },
+      {
+        "metric_id": "first_death_rate",
+        "formula_version": "1.3.0",
+        "player_ref": "steam:76561190000000012",
+        "value": 0.3333333333333333,
+        "numerator": 7,
+        "denominator": 21,
+        "min_sample": 10,
+        "sample_ok": true
+      },
+      {
+        "metric_id": "friendly_flash_per_round",
+        "formula_version": "1.3.0",
+        "player_ref": "anon:7012abc970f51fcf",
+        "value": 1.1388887628203346,
+        "numerator": 23.916664019227028,
+        "denominator": 21,
+        "min_sample": 10,
+        "sample_ok": true
+      },
+      {
+        "metric_id": "friendly_flash_per_round",
+        "formula_version": "1.3.0",
+        "player_ref": "anon:70b553d7d11c7834",
+        "value": 1.6416463596480233,
+        "numerator": 34.47457355260849,
+        "denominator": 21,
+        "min_sample": 10,
+        "sample_ok": true
+      },
+      {
+        "metric_id": "friendly_flash_per_round",
+        "formula_version": "1.3.0",
+        "player_ref": "anon:c5465ee310e3de5c",
+        "value": 0.7232066818646022,
+        "numerator": 15.187340319156647,
+        "denominator": 21,
+        "min_sample": 10,
+        "sample_ok": true
+      },
+      {
+        "metric_id": "friendly_flash_per_round",
+        "formula_version": "1.3.0",
+        "player_ref": "anon:e6ee7b19a4cea2ff",
+        "value": 0.11378855932326544,
+        "numerator": 2.389559745788574,
+        "denominator": 21,
+        "min_sample": 10,
+        "sample_ok": true
+      },
+      {
+        "metric_id": "friendly_flash_per_round",
+        "formula_version": "1.3.0",
+        "player_ref": "anon:e87c83e1bd60669b",
+        "value": 0.31997722073605184,
+        "numerator": 6.079567193984985,
+        "denominator": 19,
+        "min_sample": 10,
+        "sample_ok": true
+      },
+      {
+        "metric_id": "friendly_flash_per_round",
+        "formula_version": "1.3.0",
+        "player_ref": "anon:edea2b31b4109de0",
+        "value": 0.71673888251895,
+        "numerator": 15.05151653289795,
+        "denominator": 21,
+        "min_sample": 10,
+        "sample_ok": true
+      },
+      {
+        "metric_id": "friendly_flash_per_round",
+        "formula_version": "1.3.0",
+        "player_ref": "steam:76561190000000010",
+        "value": 0.05328176418940226,
+        "numerator": 1.1189170479774475,
+        "denominator": 21,
+        "min_sample": 10,
+        "sample_ok": true
+      },
+      {
+        "metric_id": "friendly_flash_per_round",
+        "formula_version": "1.3.0",
+        "player_ref": "steam:76561190000000011",
+        "value": 0.8389359222991126,
+        "numerator": 17.617654368281364,
+        "denominator": 21,
+        "min_sample": 10,
+        "sample_ok": true
+      },
+      {
+        "metric_id": "friendly_flash_per_round",
+        "formula_version": "1.3.0",
+        "player_ref": "steam:76561190000000013",
+        "value": 0,
+        "numerator": 0,
+        "denominator": 21,
+        "min_sample": 10,
+        "sample_ok": true
+      },
+      {
+        "metric_id": "friendly_flash_per_round",
+        "formula_version": "1.3.0",
+        "player_ref": "steam:76561190000000012",
+        "value": 0,
+        "numerator": 0,
+        "denominator": 21,
+        "min_sample": 10,
+        "sample_ok": true
+      },
+      {
+        "metric_id": "team_damage_per_round",
+        "formula_version": "1.3.0",
+        "player_ref": "anon:7012abc970f51fcf",
+        "value": 0.42857142857142855,
+        "numerator": 9,
+        "denominator": 21,
+        "min_sample": 10,
+        "sample_ok": true
+      },
+      {
+        "metric_id": "team_damage_per_round",
+        "formula_version": "1.3.0",
+        "player_ref": "anon:70b553d7d11c7834",
+        "value": 3.3333333333333335,
+        "numerator": 70,
+        "denominator": 21,
+        "min_sample": 10,
+        "sample_ok": true
+      },
+      {
+        "metric_id": "team_damage_per_round",
+        "formula_version": "1.3.0",
+        "player_ref": "anon:c5465ee310e3de5c",
+        "value": 0.42857142857142855,
+        "numerator": 9,
+        "denominator": 21,
+        "min_sample": 10,
+        "sample_ok": true
+      },
+      {
+        "metric_id": "team_damage_per_round",
+        "formula_version": "1.3.0",
+        "player_ref": "anon:e6ee7b19a4cea2ff",
+        "value": 6.571428571428571,
+        "numerator": 138,
+        "denominator": 21,
+        "min_sample": 10,
+        "sample_ok": true
+      },
+      {
+        "metric_id": "team_damage_per_round",
+        "formula_version": "1.3.0",
+        "player_ref": "anon:e87c83e1bd60669b",
+        "value": 1.263157894736842,
+        "numerator": 24,
+        "denominator": 19,
+        "min_sample": 10,
+        "sample_ok": true
+      },
+      {
+        "metric_id": "team_damage_per_round",
+        "formula_version": "1.3.0",
+        "player_ref": "anon:edea2b31b4109de0",
+        "value": 0.6190476190476191,
+        "numerator": 13,
+        "denominator": 21,
+        "min_sample": 10,
+        "sample_ok": true
+      },
+      {
+        "metric_id": "team_damage_per_round",
+        "formula_version": "1.3.0",
+        "player_ref": "steam:76561190000000010",
+        "value": 4.428571428571429,
+        "numerator": 93,
+        "denominator": 21,
+        "min_sample": 10,
+        "sample_ok": true
+      },
+      {
+        "metric_id": "team_damage_per_round",
+        "formula_version": "1.3.0",
+        "player_ref": "steam:76561190000000011",
+        "value": 1.8571428571428572,
+        "numerator": 39,
+        "denominator": 21,
+        "min_sample": 10,
+        "sample_ok": true
+      },
+      {
+        "metric_id": "team_damage_per_round",
+        "formula_version": "1.3.0",
+        "player_ref": "steam:76561190000000013",
+        "value": 0,
+        "numerator": 0,
+        "denominator": 21,
+        "min_sample": 10,
+        "sample_ok": true
+      },
+      {
+        "metric_id": "team_damage_per_round",
+        "formula_version": "1.3.0",
+        "player_ref": "steam:76561190000000012",
+        "value": 0,
+        "numerator": 0,
+        "denominator": 21,
+        "min_sample": 10,
+        "sample_ok": true
+      }
+    ],
+    "awards": [
+      {
+        "award_id": "cegador-de-amigos",
+        "metric_id": "friendly_flash_per_round",
+        "formula_version": "1.3.0",
+        "winner_ref": "steam:76561190000000011",
+        "value": 0.8389359222991126,
+        "numerator": 17.617654368281364,
+        "denominator": 21,
+        "criterion": "Segundos de cegueira causados em companheiros de time, por round jogado. Cegar a si mesmo nao conta. Minimo de 10 rounds e 2 membros elegiveis.",
+        "tied_with": [
+          "steam:76561190000000011"
+        ]
+      },
+      {
+        "award_id": "perigo-interno",
+        "metric_id": "team_damage_per_round",
+        "formula_version": "1.3.0",
+        "winner_ref": "steam:76561190000000010",
+        "value": 4.428571428571429,
+        "numerator": 93,
+        "denominator": 21,
+        "criterion": "Dano de vida causado em companheiros de time, por round jogado. Dano em si mesmo nao conta. Minimo de 10 rounds e 2 membros elegiveis.",
+        "tied_with": [
+          "steam:76561190000000010"
+        ]
+      },
+      {
+        "award_id": "primeiro-a-cair",
+        "metric_id": "first_death_rate",
+        "formula_version": "1.3.0",
+        "winner_ref": "steam:76561190000000012",
+        "value": 0.3333333333333333,
+        "numerator": 7,
+        "denominator": 21,
+        "criterion": "Proporcao de rounds em que o jogador foi a primeira morte do proprio time. Numerador: rounds em que morreu antes de qualquer companheiro de lado. Denominador: rounds jogados. Minimo de 10 rounds para concorrer e 2 membros elegiveis para haver premio.",
+        "tied_with": [
+          "steam:76561190000000012"
+        ]
+      }
+    ]
+  },
+  "valve:1000000000000000106": {
+    "match": {
+      "match_id": "valve:1000000000000000106",
+      "platform": "valve",
+      "platform_match_id": "1000000000000000106",
+      "identity_kind": "canonical",
+      "map_name": "de_inferno",
+      "started_at": "2026-10-07T23:54:40.000Z",
+      "rounds_played": 18,
+      "team_a_score": 13,
+      "team_b_score": 5,
+      "member_count": 4,
+      "player_count": 10,
+      "formula_version": "1.3.0",
+      "synthetic": false
+    },
+    "sources": [
+      {
+        "source_kind": "steam_auth_code",
+        "discovered_by": "steam:76561190000000010",
+        "source_ref": "match730_001000000000000000106_1356295338_201_competitive.dem",
+        "demo_sha256": "cbd1b9b6a028a75d30d08bf93773a017d05a0a549d3e19903bfb9ec31407d591",
+        "first_seen_at": "2026-10-08T09:50:00.005Z"
+      }
+    ],
+    "events_key": "leagues/lobby-principal/matches/valve%3A1000000000000000106/events-v1.json.gz",
+    "events_bytes": 12538,
+    "players": [
+      {
+        "player_ref": "anon:7616a2d3eb2ff222",
+        "is_member": false,
+        "display_name": null,
+        "team": "team_a",
+        "rounds_played": 18,
+        "kills": 20,
+        "deaths": 10,
+        "assists": 3,
+        "damage_dealt": 2432
+      },
+      {
+        "player_ref": "anon:45156fe1cc119270",
+        "is_member": false,
+        "display_name": null,
+        "team": "team_a",
+        "rounds_played": 18,
+        "kills": 11,
+        "deaths": 13,
+        "assists": 9,
+        "damage_dealt": 2264
+      },
+      {
+        "player_ref": "steam:76561190000000012",
+        "is_member": true,
+        "display_name": "Pivete",
+        "team": "team_b",
+        "rounds_played": 18,
+        "kills": 14,
+        "deaths": 17,
+        "assists": 2,
+        "damage_dealt": 2247
+      },
+      {
+        "player_ref": "steam:76561190000000011",
+        "is_member": true,
+        "display_name": "Rajada",
+        "team": "team_b",
+        "rounds_played": 18,
+        "kills": 16,
+        "deaths": 14,
+        "assists": 4,
+        "damage_dealt": 2127
+      },
+      {
+        "player_ref": "anon:4b3d8487be51ed7f",
+        "is_member": false,
+        "display_name": null,
+        "team": "team_a",
+        "rounds_played": 18,
+        "kills": 17,
+        "deaths": 10,
+        "assists": 6,
+        "damage_dealt": 2098
+      },
+      {
+        "player_ref": "anon:f4096012881b3677",
+        "is_member": false,
+        "display_name": null,
+        "team": "team_a",
+        "rounds_played": 18,
+        "kills": 15,
+        "deaths": 9,
+        "assists": 4,
+        "damage_dealt": 2019
+      },
+      {
+        "player_ref": "steam:76561190000000010",
+        "is_member": true,
+        "display_name": "Bagre",
+        "team": "team_b",
+        "rounds_played": 18,
+        "kills": 12,
+        "deaths": 14,
+        "assists": 6,
+        "damage_dealt": 1894
+      },
+      {
+        "player_ref": "anon:d8c93ddfc5b8b753",
+        "is_member": false,
+        "display_name": null,
+        "team": "team_a",
+        "rounds_played": 18,
+        "kills": 13,
+        "deaths": 14,
+        "assists": 9,
+        "damage_dealt": 1746
+      },
+      {
+        "player_ref": "steam:76561190000000013",
+        "is_member": true,
+        "display_name": "Zarolho",
+        "team": "team_b",
+        "rounds_played": 18,
+        "kills": 4,
+        "deaths": 14,
+        "assists": 2,
+        "damage_dealt": 980
+      },
+      {
+        "player_ref": "anon:63ae44ec3cdbfc07",
+        "is_member": false,
+        "display_name": null,
+        "team": "team_b",
+        "rounds_played": 18,
+        "kills": 3,
+        "deaths": 17,
+        "assists": 2,
+        "damage_dealt": 392
+      }
+    ],
+    "metrics": [
+      {
+        "metric_id": "first_death_rate",
+        "formula_version": "1.3.0",
+        "player_ref": "anon:45156fe1cc119270",
+        "value": 0.2777777777777778,
+        "numerator": 5,
+        "denominator": 18,
+        "min_sample": 10,
+        "sample_ok": true
+      },
+      {
+        "metric_id": "first_death_rate",
+        "formula_version": "1.3.0",
+        "player_ref": "anon:4b3d8487be51ed7f",
+        "value": 0,
+        "numerator": 0,
+        "denominator": 18,
+        "min_sample": 10,
+        "sample_ok": true
+      },
+      {
+        "metric_id": "first_death_rate",
+        "formula_version": "1.3.0",
+        "player_ref": "anon:63ae44ec3cdbfc07",
+        "value": 0.05555555555555555,
+        "numerator": 1,
+        "denominator": 18,
+        "min_sample": 10,
+        "sample_ok": true
+      },
+      {
+        "metric_id": "first_death_rate",
+        "formula_version": "1.3.0",
+        "player_ref": "anon:7616a2d3eb2ff222",
+        "value": 0.2222222222222222,
+        "numerator": 4,
+        "denominator": 18,
+        "min_sample": 10,
+        "sample_ok": true
+      },
+      {
+        "metric_id": "first_death_rate",
+        "formula_version": "1.3.0",
+        "player_ref": "anon:d8c93ddfc5b8b753",
+        "value": 0.2777777777777778,
+        "numerator": 5,
+        "denominator": 18,
+        "min_sample": 10,
+        "sample_ok": true
+      },
+      {
+        "metric_id": "first_death_rate",
+        "formula_version": "1.3.0",
+        "player_ref": "anon:f4096012881b3677",
+        "value": 0.16666666666666666,
+        "numerator": 3,
+        "denominator": 18,
+        "min_sample": 10,
+        "sample_ok": true
+      },
+      {
+        "metric_id": "first_death_rate",
+        "formula_version": "1.3.0",
+        "player_ref": "steam:76561190000000010",
+        "value": 0.16666666666666666,
+        "numerator": 3,
+        "denominator": 18,
+        "min_sample": 10,
+        "sample_ok": true
+      },
+      {
+        "metric_id": "first_death_rate",
+        "formula_version": "1.3.0",
+        "player_ref": "steam:76561190000000011",
+        "value": 0.05555555555555555,
+        "numerator": 1,
+        "denominator": 18,
+        "min_sample": 10,
+        "sample_ok": true
+      },
+      {
+        "metric_id": "first_death_rate",
+        "formula_version": "1.3.0",
+        "player_ref": "steam:76561190000000013",
+        "value": 0.16666666666666666,
+        "numerator": 3,
+        "denominator": 18,
+        "min_sample": 10,
+        "sample_ok": true
+      },
+      {
+        "metric_id": "first_death_rate",
+        "formula_version": "1.3.0",
+        "player_ref": "steam:76561190000000012",
+        "value": 0.5555555555555556,
+        "numerator": 10,
+        "denominator": 18,
+        "min_sample": 10,
+        "sample_ok": true
+      },
+      {
+        "metric_id": "friendly_flash_per_round",
+        "formula_version": "1.3.0",
+        "player_ref": "anon:45156fe1cc119270",
+        "value": 1.5613888137870364,
+        "numerator": 28.104998648166656,
+        "denominator": 18,
+        "min_sample": 10,
+        "sample_ok": true
+      },
+      {
+        "metric_id": "friendly_flash_per_round",
+        "formula_version": "1.3.0",
+        "player_ref": "anon:4b3d8487be51ed7f",
+        "value": 1.7641789880063798,
+        "numerator": 31.755221784114838,
+        "denominator": 18,
+        "min_sample": 10,
+        "sample_ok": true
+      },
+      {
+        "metric_id": "friendly_flash_per_round",
+        "formula_version": "1.3.0",
+        "player_ref": "anon:63ae44ec3cdbfc07",
+        "value": 0.322873566713598,
+        "numerator": 5.811724200844765,
+        "denominator": 18,
+        "min_sample": 10,
+        "sample_ok": true
+      },
+      {
+        "metric_id": "friendly_flash_per_round",
+        "formula_version": "1.3.0",
+        "player_ref": "anon:7616a2d3eb2ff222",
+        "value": 0.6098557578192817,
+        "numerator": 10.97740364074707,
+        "denominator": 18,
+        "min_sample": 10,
+        "sample_ok": true
+      },
+      {
+        "metric_id": "friendly_flash_per_round",
+        "formula_version": "1.3.0",
+        "player_ref": "anon:d8c93ddfc5b8b753",
+        "value": 0.7059099757009082,
+        "numerator": 12.706379562616348,
+        "denominator": 18,
+        "min_sample": 10,
+        "sample_ok": true
+      },
+      {
+        "metric_id": "friendly_flash_per_round",
+        "formula_version": "1.3.0",
+        "player_ref": "anon:f4096012881b3677",
+        "value": 0.4389459706015057,
+        "numerator": 7.901027470827103,
+        "denominator": 18,
+        "min_sample": 10,
+        "sample_ok": true
+      },
+      {
+        "metric_id": "friendly_flash_per_round",
+        "formula_version": "1.3.0",
+        "player_ref": "steam:76561190000000010",
+        "value": 0.5689097742239634,
+        "numerator": 10.240375936031342,
+        "denominator": 18,
+        "min_sample": 10,
+        "sample_ok": true
+      },
+      {
+        "metric_id": "friendly_flash_per_round",
+        "formula_version": "1.3.0",
+        "player_ref": "steam:76561190000000011",
+        "value": 0.823115176624722,
+        "numerator": 14.816073179244995,
+        "denominator": 18,
+        "min_sample": 10,
+        "sample_ok": true
+      },
+      {
+        "metric_id": "friendly_flash_per_round",
+        "formula_version": "1.3.0",
+        "player_ref": "steam:76561190000000013",
+        "value": 0,
+        "numerator": 0,
+        "denominator": 18,
+        "min_sample": 10,
+        "sample_ok": true
+      },
+      {
+        "metric_id": "friendly_flash_per_round",
+        "formula_version": "1.3.0",
+        "player_ref": "steam:76561190000000012",
+        "value": 0,
+        "numerator": 0,
+        "denominator": 18,
+        "min_sample": 10,
+        "sample_ok": true
+      },
+      {
+        "metric_id": "team_damage_per_round",
+        "formula_version": "1.3.0",
+        "player_ref": "anon:45156fe1cc119270",
+        "value": 11,
+        "numerator": 198,
+        "denominator": 18,
+        "min_sample": 10,
+        "sample_ok": true
+      },
+      {
+        "metric_id": "team_damage_per_round",
+        "formula_version": "1.3.0",
+        "player_ref": "anon:4b3d8487be51ed7f",
+        "value": 8.333333333333334,
+        "numerator": 150,
+        "denominator": 18,
+        "min_sample": 10,
+        "sample_ok": true
+      },
+      {
+        "metric_id": "team_damage_per_round",
+        "formula_version": "1.3.0",
+        "player_ref": "anon:63ae44ec3cdbfc07",
+        "value": 1,
+        "numerator": 18,
+        "denominator": 18,
+        "min_sample": 10,
+        "sample_ok": true
+      },
+      {
+        "metric_id": "team_damage_per_round",
+        "formula_version": "1.3.0",
+        "player_ref": "anon:7616a2d3eb2ff222",
+        "value": 2.611111111111111,
+        "numerator": 47,
+        "denominator": 18,
+        "min_sample": 10,
+        "sample_ok": true
+      },
+      {
+        "metric_id": "team_damage_per_round",
+        "formula_version": "1.3.0",
+        "player_ref": "anon:d8c93ddfc5b8b753",
+        "value": 11.833333333333334,
+        "numerator": 213,
+        "denominator": 18,
+        "min_sample": 10,
+        "sample_ok": true
+      },
+      {
+        "metric_id": "team_damage_per_round",
+        "formula_version": "1.3.0",
+        "player_ref": "anon:f4096012881b3677",
+        "value": 0,
+        "numerator": 0,
+        "denominator": 18,
+        "min_sample": 10,
+        "sample_ok": true
+      },
+      {
+        "metric_id": "team_damage_per_round",
+        "formula_version": "1.3.0",
+        "player_ref": "steam:76561190000000010",
+        "value": 1.1666666666666667,
+        "numerator": 21,
+        "denominator": 18,
+        "min_sample": 10,
+        "sample_ok": true
+      },
+      {
+        "metric_id": "team_damage_per_round",
+        "formula_version": "1.3.0",
+        "player_ref": "steam:76561190000000011",
+        "value": 4.277777777777778,
+        "numerator": 77,
+        "denominator": 18,
+        "min_sample": 10,
+        "sample_ok": true
+      },
+      {
+        "metric_id": "team_damage_per_round",
+        "formula_version": "1.3.0",
+        "player_ref": "steam:76561190000000013",
+        "value": 0.5555555555555556,
+        "numerator": 10,
+        "denominator": 18,
+        "min_sample": 10,
+        "sample_ok": true
+      },
+      {
+        "metric_id": "team_damage_per_round",
+        "formula_version": "1.3.0",
+        "player_ref": "steam:76561190000000012",
+        "value": 0,
+        "numerator": 0,
+        "denominator": 18,
+        "min_sample": 10,
+        "sample_ok": true
+      }
+    ],
+    "awards": [
+      {
+        "award_id": "cegador-de-amigos",
+        "metric_id": "friendly_flash_per_round",
+        "formula_version": "1.3.0",
+        "winner_ref": "steam:76561190000000011",
+        "value": 0.823115176624722,
+        "numerator": 14.816073179244995,
+        "denominator": 18,
+        "criterion": "Segundos de cegueira causados em companheiros de time, por round jogado. Cegar a si mesmo nao conta. Minimo de 10 rounds e 2 membros elegiveis.",
+        "tied_with": [
+          "steam:76561190000000011"
+        ]
+      },
+      {
+        "award_id": "perigo-interno",
+        "metric_id": "team_damage_per_round",
+        "formula_version": "1.3.0",
+        "winner_ref": "steam:76561190000000011",
+        "value": 4.277777777777778,
+        "numerator": 77,
+        "denominator": 18,
+        "criterion": "Dano de vida causado em companheiros de time, por round jogado. Dano em si mesmo nao conta. Minimo de 10 rounds e 2 membros elegiveis.",
+        "tied_with": [
+          "steam:76561190000000011"
+        ]
+      },
+      {
+        "award_id": "primeiro-a-cair",
+        "metric_id": "first_death_rate",
+        "formula_version": "1.3.0",
+        "winner_ref": "steam:76561190000000012",
+        "value": 0.5555555555555556,
+        "numerator": 10,
+        "denominator": 18,
+        "criterion": "Proporcao de rounds em que o jogador foi a primeira morte do proprio time. Numerador: rounds em que morreu antes de qualquer companheiro de lado. Denominador: rounds jogados. Minimo de 10 rounds para concorrer e 2 membros elegiveis para haver premio.",
+        "tied_with": [
+          "steam:76561190000000012"
+        ]
+      }
+    ]
+  },
+  "valve:1000000000000000108": {
+    "match": {
+      "match_id": "valve:1000000000000000108",
+      "platform": "valve",
+      "platform_match_id": "1000000000000000108",
+      "identity_kind": "canonical",
+      "map_name": "de_ancient",
+      "started_at": "2026-10-06T00:51:28.000Z",
+      "rounds_played": 22,
+      "team_a_score": 9,
+      "team_b_score": 13,
+      "member_count": 2,
+      "player_count": 10,
+      "formula_version": "1.3.0",
+      "synthetic": false
+    },
+    "sources": [
+      {
+        "source_kind": "steam_auth_code",
+        "discovered_by": "steam:76561190000000010",
+        "source_ref": "match730_001000000000000000108_1858741319_202_competitive.dem",
+        "demo_sha256": "7d5f17039684fd6ceb1b679f5dfbcd3cb397577de776c1e4a51123e05b0e30ab",
+        "first_seen_at": "2026-10-07T18:48:27.979Z"
+      }
+    ],
+    "events_key": "leagues/lobby-principal/matches/valve%3A1000000000000000108/events-v1.json.gz",
+    "events_bytes": 13472,
+    "players": [
+      {
+        "player_ref": "anon:0eec72ce4767bd3f",
+        "is_member": false,
+        "display_name": null,
+        "team": "team_b",
+        "rounds_played": 22,
+        "kills": 30,
+        "deaths": 13,
+        "assists": 3,
+        "damage_dealt": 3875
+      },
+      {
+        "player_ref": "anon:f7f17849daf597d0",
+        "is_member": false,
+        "display_name": null,
+        "team": "team_a",
+        "rounds_played": 22,
+        "kills": 21,
+        "deaths": 17,
+        "assists": 5,
+        "damage_dealt": 3033
+      },
+      {
+        "player_ref": "anon:09887d62724ee776",
+        "is_member": false,
+        "display_name": null,
+        "team": "team_a",
+        "rounds_played": 22,
+        "kills": 18,
+        "deaths": 16,
+        "assists": 5,
+        "damage_dealt": 2485
+      },
+      {
+        "player_ref": "anon:34b2ed3f328cade2",
+        "is_member": false,
+        "display_name": null,
+        "team": "team_b",
+        "rounds_played": 21,
+        "kills": 20,
+        "deaths": 17,
+        "assists": 4,
+        "damage_dealt": 2252
+      },
+      {
+        "player_ref": "steam:76561190000000012",
+        "is_member": true,
+        "display_name": "Pivete",
+        "team": "team_a",
+        "rounds_played": 22,
+        "kills": 15,
+        "deaths": 18,
+        "assists": 9,
+        "damage_dealt": 2234
+      },
+      {
+        "player_ref": "anon:2ac28e011e682852",
+        "is_member": false,
+        "display_name": null,
+        "team": "team_b",
+        "rounds_played": 22,
+        "kills": 12,
+        "deaths": 21,
+        "assists": 11,
+        "damage_dealt": 1971
+      },
+      {
+        "player_ref": "anon:d0ae8f542498ff43",
+        "is_member": false,
+        "display_name": null,
+        "team": "team_b",
+        "rounds_played": 22,
+        "kills": 15,
+        "deaths": 13,
+        "assists": 1,
+        "damage_dealt": 1954
+      },
+      {
+        "player_ref": "steam:76561190000000010",
+        "is_member": true,
+        "display_name": "Bagre",
+        "team": "team_a",
+        "rounds_played": 22,
+        "kills": 12,
+        "deaths": 18,
+        "assists": 6,
+        "damage_dealt": 1725
+      },
+      {
+        "player_ref": "anon:43105a4cfff66de9",
+        "is_member": false,
+        "display_name": null,
+        "team": "team_a",
+        "rounds_played": 22,
+        "kills": 12,
+        "deaths": 19,
+        "assists": 2,
+        "damage_dealt": 1433
+      },
+      {
+        "player_ref": "anon:6a089e9d552ce4e3",
+        "is_member": false,
+        "display_name": null,
+        "team": "team_b",
+        "rounds_played": 22,
+        "kills": 8,
+        "deaths": 17,
+        "assists": 6,
+        "damage_dealt": 1349
+      }
+    ],
+    "metrics": [
+      {
+        "metric_id": "first_death_rate",
+        "formula_version": "1.3.0",
+        "player_ref": "anon:09887d62724ee776",
+        "value": 0.13636363636363635,
+        "numerator": 3,
+        "denominator": 22,
+        "min_sample": 10,
+        "sample_ok": true
+      },
+      {
+        "metric_id": "first_death_rate",
+        "formula_version": "1.3.0",
+        "player_ref": "anon:0eec72ce4767bd3f",
+        "value": 0.13636363636363635,
+        "numerator": 3,
+        "denominator": 22,
+        "min_sample": 10,
+        "sample_ok": true
+      },
+      {
+        "metric_id": "first_death_rate",
+        "formula_version": "1.3.0",
+        "player_ref": "anon:2ac28e011e682852",
+        "value": 0.4090909090909091,
+        "numerator": 9,
+        "denominator": 22,
+        "min_sample": 10,
+        "sample_ok": true
+      },
+      {
+        "metric_id": "first_death_rate",
+        "formula_version": "1.3.0",
+        "player_ref": "anon:34b2ed3f328cade2",
+        "value": 0.38095238095238093,
+        "numerator": 8,
+        "denominator": 21,
+        "min_sample": 10,
+        "sample_ok": true
+      },
+      {
+        "metric_id": "first_death_rate",
+        "formula_version": "1.3.0",
+        "player_ref": "anon:43105a4cfff66de9",
+        "value": 0.22727272727272727,
+        "numerator": 5,
+        "denominator": 22,
+        "min_sample": 10,
+        "sample_ok": true
+      },
+      {
+        "metric_id": "first_death_rate",
+        "formula_version": "1.3.0",
+        "player_ref": "anon:6a089e9d552ce4e3",
+        "value": 0,
+        "numerator": 0,
+        "denominator": 22,
+        "min_sample": 10,
+        "sample_ok": true
+      },
+      {
+        "metric_id": "first_death_rate",
+        "formula_version": "1.3.0",
+        "player_ref": "anon:d0ae8f542498ff43",
+        "value": 0.09090909090909091,
+        "numerator": 2,
+        "denominator": 22,
+        "min_sample": 10,
+        "sample_ok": true
+      },
+      {
+        "metric_id": "first_death_rate",
+        "formula_version": "1.3.0",
+        "player_ref": "anon:f7f17849daf597d0",
+        "value": 0.09090909090909091,
+        "numerator": 2,
+        "denominator": 22,
+        "min_sample": 10,
+        "sample_ok": true
+      },
+      {
+        "metric_id": "first_death_rate",
+        "formula_version": "1.3.0",
+        "player_ref": "steam:76561190000000010",
+        "value": 0.22727272727272727,
+        "numerator": 5,
+        "denominator": 22,
+        "min_sample": 10,
+        "sample_ok": true
+      },
+      {
+        "metric_id": "first_death_rate",
+        "formula_version": "1.3.0",
+        "player_ref": "steam:76561190000000012",
+        "value": 0.3181818181818182,
+        "numerator": 7,
+        "denominator": 22,
+        "min_sample": 10,
+        "sample_ok": true
+      },
+      {
+        "metric_id": "friendly_flash_per_round",
+        "formula_version": "1.3.0",
+        "player_ref": "anon:09887d62724ee776",
+        "value": 0.5695634132081812,
+        "numerator": 12.530395090579987,
+        "denominator": 22,
+        "min_sample": 10,
+        "sample_ok": true
+      },
+      {
+        "metric_id": "friendly_flash_per_round",
+        "formula_version": "1.3.0",
+        "player_ref": "anon:0eec72ce4767bd3f",
+        "value": 0.022880470210855656,
+        "numerator": 0.5033703446388245,
+        "denominator": 22,
+        "min_sample": 10,
+        "sample_ok": true
+      },
+      {
+        "metric_id": "friendly_flash_per_round",
+        "formula_version": "1.3.0",
+        "player_ref": "anon:2ac28e011e682852",
+        "value": 0,
+        "numerator": 0,
+        "denominator": 22,
+        "min_sample": 10,
+        "sample_ok": true
+      },
+      {
+        "metric_id": "friendly_flash_per_round",
+        "formula_version": "1.3.0",
+        "player_ref": "anon:34b2ed3f328cade2",
+        "value": 0.7612524884087699,
+        "numerator": 15.986302256584167,
+        "denominator": 21,
+        "min_sample": 10,
+        "sample_ok": true
+      },
+      {
+        "metric_id": "friendly_flash_per_round",
+        "formula_version": "1.3.0",
+        "player_ref": "anon:43105a4cfff66de9",
+        "value": 0.47428283569487656,
+        "numerator": 10.434222385287285,
+        "denominator": 22,
+        "min_sample": 10,
+        "sample_ok": true
+      },
+      {
+        "metric_id": "friendly_flash_per_round",
+        "formula_version": "1.3.0",
+        "player_ref": "anon:6a089e9d552ce4e3",
+        "value": 0.03404906392097473,
+        "numerator": 0.7490794062614441,
+        "denominator": 22,
+        "min_sample": 10,
+        "sample_ok": true
+      },
+      {
+        "metric_id": "friendly_flash_per_round",
+        "formula_version": "1.3.0",
+        "player_ref": "anon:d0ae8f542498ff43",
+        "value": 0.13810105215419421,
+        "numerator": 3.038223147392273,
+        "denominator": 22,
+        "min_sample": 10,
+        "sample_ok": true
+      },
+      {
+        "metric_id": "friendly_flash_per_round",
+        "formula_version": "1.3.0",
+        "player_ref": "anon:f7f17849daf597d0",
+        "value": 0.6305228227918799,
+        "numerator": 13.871502101421356,
+        "denominator": 22,
+        "min_sample": 10,
+        "sample_ok": true
+      },
+      {
+        "metric_id": "friendly_flash_per_round",
+        "formula_version": "1.3.0",
+        "player_ref": "steam:76561190000000010",
+        "value": 0.3379190347411416,
+        "numerator": 7.434218764305115,
+        "denominator": 22,
+        "min_sample": 10,
+        "sample_ok": true
+      },
+      {
+        "metric_id": "friendly_flash_per_round",
+        "formula_version": "1.3.0",
+        "player_ref": "steam:76561190000000012",
+        "value": 0,
+        "numerator": 0,
+        "denominator": 22,
+        "min_sample": 10,
+        "sample_ok": true
+      },
+      {
+        "metric_id": "team_damage_per_round",
+        "formula_version": "1.3.0",
+        "player_ref": "anon:09887d62724ee776",
+        "value": 0,
+        "numerator": 0,
+        "denominator": 22,
+        "min_sample": 10,
+        "sample_ok": true
+      },
+      {
+        "metric_id": "team_damage_per_round",
+        "formula_version": "1.3.0",
+        "player_ref": "anon:0eec72ce4767bd3f",
+        "value": 1.6818181818181819,
+        "numerator": 37,
+        "denominator": 22,
+        "min_sample": 10,
+        "sample_ok": true
+      },
+      {
+        "metric_id": "team_damage_per_round",
+        "formula_version": "1.3.0",
+        "player_ref": "anon:2ac28e011e682852",
+        "value": 2.4545454545454546,
+        "numerator": 54,
+        "denominator": 22,
+        "min_sample": 10,
+        "sample_ok": true
+      },
+      {
+        "metric_id": "team_damage_per_round",
+        "formula_version": "1.3.0",
+        "player_ref": "anon:34b2ed3f328cade2",
+        "value": 4.857142857142857,
+        "numerator": 102,
+        "denominator": 21,
+        "min_sample": 10,
+        "sample_ok": true
+      },
+      {
+        "metric_id": "team_damage_per_round",
+        "formula_version": "1.3.0",
+        "player_ref": "anon:43105a4cfff66de9",
+        "value": 0,
+        "numerator": 0,
+        "denominator": 22,
+        "min_sample": 10,
+        "sample_ok": true
+      },
+      {
+        "metric_id": "team_damage_per_round",
+        "formula_version": "1.3.0",
+        "player_ref": "anon:6a089e9d552ce4e3",
+        "value": 0,
+        "numerator": 0,
+        "denominator": 22,
+        "min_sample": 10,
+        "sample_ok": true
+      },
+      {
+        "metric_id": "team_damage_per_round",
+        "formula_version": "1.3.0",
+        "player_ref": "anon:d0ae8f542498ff43",
+        "value": 0,
+        "numerator": 0,
+        "denominator": 22,
+        "min_sample": 10,
+        "sample_ok": true
+      },
+      {
+        "metric_id": "team_damage_per_round",
+        "formula_version": "1.3.0",
+        "player_ref": "anon:f7f17849daf597d0",
+        "value": 0,
+        "numerator": 0,
+        "denominator": 22,
+        "min_sample": 10,
+        "sample_ok": true
+      },
+      {
+        "metric_id": "team_damage_per_round",
+        "formula_version": "1.3.0",
+        "player_ref": "steam:76561190000000010",
+        "value": 0,
+        "numerator": 0,
+        "denominator": 22,
+        "min_sample": 10,
+        "sample_ok": true
+      },
+      {
+        "metric_id": "team_damage_per_round",
+        "formula_version": "1.3.0",
+        "player_ref": "steam:76561190000000012",
+        "value": 0.4090909090909091,
+        "numerator": 9,
+        "denominator": 22,
+        "min_sample": 10,
+        "sample_ok": true
+      }
+    ],
+    "awards": [
+      {
+        "award_id": "cegador-de-amigos",
+        "metric_id": "friendly_flash_per_round",
+        "formula_version": "1.3.0",
+        "winner_ref": "steam:76561190000000010",
+        "value": 0.3379190347411416,
+        "numerator": 7.434218764305115,
+        "denominator": 22,
+        "criterion": "Segundos de cegueira causados em companheiros de time, por round jogado. Cegar a si mesmo nao conta. Minimo de 10 rounds e 2 membros elegiveis.",
+        "tied_with": [
+          "steam:76561190000000010"
+        ]
+      },
+      {
+        "award_id": "perigo-interno",
+        "metric_id": "team_damage_per_round",
+        "formula_version": "1.3.0",
+        "winner_ref": "steam:76561190000000012",
+        "value": 0.4090909090909091,
+        "numerator": 9,
+        "denominator": 22,
+        "criterion": "Dano de vida causado em companheiros de time, por round jogado. Dano em si mesmo nao conta. Minimo de 10 rounds e 2 membros elegiveis.",
+        "tied_with": [
+          "steam:76561190000000012"
+        ]
+      },
+      {
+        "award_id": "primeiro-a-cair",
+        "metric_id": "first_death_rate",
+        "formula_version": "1.3.0",
+        "winner_ref": "steam:76561190000000012",
+        "value": 0.3181818181818182,
+        "numerator": 7,
+        "denominator": 22,
+        "criterion": "Proporcao de rounds em que o jogador foi a primeira morte do proprio time. Numerador: rounds em que morreu antes de qualquer companheiro de lado. Denominador: rounds jogados. Minimo de 10 rounds para concorrer e 2 membros elegiveis para haver premio.",
+        "tied_with": [
+          "steam:76561190000000012"
+        ]
+      }
+    ]
+  },
+  "valve:1000000000000000110": {
+    "match": {
+      "match_id": "valve:1000000000000000110",
+      "platform": "valve",
+      "platform_match_id": "1000000000000000110",
+      "identity_kind": "canonical",
+      "map_name": "de_mirage",
+      "started_at": "2026-10-06T00:15:57.000Z",
+      "rounds_played": 22,
+      "team_a_score": 9,
+      "team_b_score": 13,
+      "member_count": 2,
+      "player_count": 10,
+      "formula_version": "1.3.0",
+      "synthetic": false
+    },
+    "sources": [
+      {
+        "source_kind": "steam_auth_code",
+        "discovered_by": "steam:76561190000000010",
+        "source_ref": "match730_001000000000000000110_1608730321_202_competitive.dem",
+        "demo_sha256": "491409776a7920ecff63f206340cc534de5d9b34df74f95f1434ec993ecde0c6",
+        "first_seen_at": "2026-10-08T09:49:59.090Z"
+      }
+    ],
+    "events_key": "leagues/lobby-principal/matches/valve%3A1000000000000000110/events-v1.json.gz",
+    "events_bytes": 12041,
+    "players": [
+      {
+        "player_ref": "steam:76561190000000010",
+        "is_member": true,
+        "display_name": "Bagre",
+        "team": "team_b",
+        "rounds_played": 22,
+        "kills": 22,
+        "deaths": 14,
+        "assists": 3,
+        "damage_dealt": 3138
+      },
+      {
+        "player_ref": "anon:9b7931e2bc4c6caf",
+        "is_member": false,
+        "display_name": null,
+        "team": "team_a",
+        "rounds_played": 22,
+        "kills": 16,
+        "deaths": 17,
+        "assists": 5,
+        "damage_dealt": 2900
+      },
+      {
+        "player_ref": "anon:01f2635ebda11402",
+        "is_member": false,
+        "display_name": null,
+        "team": "team_a",
+        "rounds_played": 22,
+        "kills": 20,
+        "deaths": 19,
+        "assists": 5,
+        "damage_dealt": 2894
+      },
+      {
+        "player_ref": "anon:f2abe3c241f57c4d",
+        "is_member": false,
+        "display_name": null,
+        "team": "team_b",
+        "rounds_played": 22,
+        "kills": 16,
+        "deaths": 18,
+        "assists": 3,
+        "damage_dealt": 2613
+      },
+      {
+        "player_ref": "steam:76561190000000012",
+        "is_member": true,
+        "display_name": "Pivete",
+        "team": "team_b",
+        "rounds_played": 22,
+        "kills": 15,
+        "deaths": 18,
+        "assists": 9,
+        "damage_dealt": 2489
+      },
+      {
+        "player_ref": "anon:991bad101135e6b9",
+        "is_member": false,
+        "display_name": null,
+        "team": "team_b",
+        "rounds_played": 22,
+        "kills": 17,
+        "deaths": 13,
+        "assists": 7,
+        "damage_dealt": 2103
+      },
+      {
+        "player_ref": "anon:cd6646c940cc25de",
+        "is_member": false,
+        "display_name": null,
+        "team": "team_b",
+        "rounds_played": 22,
+        "kills": 18,
+        "deaths": 17,
+        "assists": 5,
+        "damage_dealt": 2082
+      },
+      {
+        "player_ref": "anon:d45279825529b0e5",
+        "is_member": false,
+        "display_name": null,
+        "team": "team_a",
+        "rounds_played": 22,
+        "kills": 12,
+        "deaths": 18,
+        "assists": 11,
+        "damage_dealt": 1987
+      },
+      {
+        "player_ref": "anon:70cfbe972148a343",
+        "is_member": false,
+        "display_name": null,
+        "team": "team_a",
+        "rounds_played": 22,
+        "kills": 18,
+        "deaths": 16,
+        "assists": 1,
+        "damage_dealt": 1976
+      },
+      {
+        "player_ref": "anon:5283779eb721635f",
+        "is_member": false,
+        "display_name": null,
+        "team": "team_a",
+        "rounds_played": 22,
+        "kills": 14,
+        "deaths": 18,
+        "assists": 7,
+        "damage_dealt": 1967
+      }
+    ],
+    "metrics": [
+      {
+        "metric_id": "first_death_rate",
+        "formula_version": "1.3.0",
+        "player_ref": "anon:01f2635ebda11402",
+        "value": 0.2727272727272727,
+        "numerator": 6,
+        "denominator": 22,
+        "min_sample": 10,
+        "sample_ok": true
+      },
+      {
+        "metric_id": "first_death_rate",
+        "formula_version": "1.3.0",
+        "player_ref": "anon:5283779eb721635f",
+        "value": 0.13636363636363635,
+        "numerator": 3,
+        "denominator": 22,
+        "min_sample": 10,
+        "sample_ok": true
+      },
+      {
+        "metric_id": "first_death_rate",
+        "formula_version": "1.3.0",
+        "player_ref": "anon:70cfbe972148a343",
+        "value": 0.045454545454545456,
+        "numerator": 1,
+        "denominator": 22,
+        "min_sample": 10,
+        "sample_ok": true
+      },
+      {
+        "metric_id": "first_death_rate",
+        "formula_version": "1.3.0",
+        "player_ref": "anon:991bad101135e6b9",
+        "value": 0.13636363636363635,
+        "numerator": 3,
+        "denominator": 22,
+        "min_sample": 10,
+        "sample_ok": true
+      },
+      {
+        "metric_id": "first_death_rate",
+        "formula_version": "1.3.0",
+        "player_ref": "anon:9b7931e2bc4c6caf",
+        "value": 0.2727272727272727,
+        "numerator": 6,
+        "denominator": 22,
+        "min_sample": 10,
+        "sample_ok": true
+      },
+      {
+        "metric_id": "first_death_rate",
+        "formula_version": "1.3.0",
+        "player_ref": "anon:cd6646c940cc25de",
+        "value": 0.18181818181818182,
+        "numerator": 4,
+        "denominator": 22,
+        "min_sample": 10,
+        "sample_ok": true
+      },
+      {
+        "metric_id": "first_death_rate",
+        "formula_version": "1.3.0",
+        "player_ref": "anon:d45279825529b0e5",
+        "value": 0.22727272727272727,
+        "numerator": 5,
+        "denominator": 22,
+        "min_sample": 10,
+        "sample_ok": true
+      },
+      {
+        "metric_id": "first_death_rate",
+        "formula_version": "1.3.0",
+        "player_ref": "anon:f2abe3c241f57c4d",
+        "value": 0.13636363636363635,
+        "numerator": 3,
+        "denominator": 22,
+        "min_sample": 10,
+        "sample_ok": true
+      },
+      {
+        "metric_id": "first_death_rate",
+        "formula_version": "1.3.0",
+        "player_ref": "steam:76561190000000010",
+        "value": 0.13636363636363635,
+        "numerator": 3,
+        "denominator": 22,
+        "min_sample": 10,
+        "sample_ok": true
+      },
+      {
+        "metric_id": "first_death_rate",
+        "formula_version": "1.3.0",
+        "player_ref": "steam:76561190000000012",
+        "value": 0.4090909090909091,
+        "numerator": 9,
+        "denominator": 22,
+        "min_sample": 10,
+        "sample_ok": true
+      },
+      {
+        "metric_id": "friendly_flash_per_round",
+        "formula_version": "1.3.0",
+        "player_ref": "anon:01f2635ebda11402",
+        "value": 0,
+        "numerator": 0,
+        "denominator": 22,
+        "min_sample": 10,
+        "sample_ok": true
+      },
+      {
+        "metric_id": "friendly_flash_per_round",
+        "formula_version": "1.3.0",
+        "player_ref": "anon:5283779eb721635f",
+        "value": 0.42293029752644623,
+        "numerator": 9.304466545581818,
+        "denominator": 22,
+        "min_sample": 10,
+        "sample_ok": true
+      },
+      {
+        "metric_id": "friendly_flash_per_round",
+        "formula_version": "1.3.0",
+        "player_ref": "anon:70cfbe972148a343",
+        "value": 0,
+        "numerator": 0,
+        "denominator": 22,
+        "min_sample": 10,
+        "sample_ok": true
+      },
+      {
+        "metric_id": "friendly_flash_per_round",
+        "formula_version": "1.3.0",
+        "player_ref": "anon:991bad101135e6b9",
+        "value": 0,
+        "numerator": 0,
+        "denominator": 22,
+        "min_sample": 10,
+        "sample_ok": true
+      },
+      {
+        "metric_id": "friendly_flash_per_round",
+        "formula_version": "1.3.0",
+        "player_ref": "anon:9b7931e2bc4c6caf",
+        "value": 0.025816020640459927,
+        "numerator": 0.5679524540901184,
+        "denominator": 22,
+        "min_sample": 10,
+        "sample_ok": true
+      },
+      {
+        "metric_id": "friendly_flash_per_round",
+        "formula_version": "1.3.0",
+        "player_ref": "anon:cd6646c940cc25de",
+        "value": 0,
+        "numerator": 0,
+        "denominator": 22,
+        "min_sample": 10,
+        "sample_ok": true
+      },
+      {
+        "metric_id": "friendly_flash_per_round",
+        "formula_version": "1.3.0",
+        "player_ref": "anon:d45279825529b0e5",
+        "value": 0.13975324549458243,
+        "numerator": 3.0745714008808136,
+        "denominator": 22,
+        "min_sample": 10,
+        "sample_ok": true
+      },
+      {
+        "metric_id": "friendly_flash_per_round",
+        "formula_version": "1.3.0",
+        "player_ref": "anon:f2abe3c241f57c4d",
+        "value": 0,
+        "numerator": 0,
+        "denominator": 22,
+        "min_sample": 10,
+        "sample_ok": true
+      },
+      {
+        "metric_id": "friendly_flash_per_round",
+        "formula_version": "1.3.0",
+        "player_ref": "steam:76561190000000010",
+        "value": 0.025497566569935192,
+        "numerator": 0.5609464645385742,
+        "denominator": 22,
+        "min_sample": 10,
+        "sample_ok": true
+      },
+      {
+        "metric_id": "friendly_flash_per_round",
+        "formula_version": "1.3.0",
+        "player_ref": "steam:76561190000000012",
+        "value": 0,
+        "numerator": 0,
+        "denominator": 22,
+        "min_sample": 10,
+        "sample_ok": true
+      },
+      {
+        "metric_id": "team_damage_per_round",
+        "formula_version": "1.3.0",
+        "player_ref": "anon:01f2635ebda11402",
+        "value": 0,
+        "numerator": 0,
+        "denominator": 22,
+        "min_sample": 10,
+        "sample_ok": true
+      },
+      {
+        "metric_id": "team_damage_per_round",
+        "formula_version": "1.3.0",
+        "player_ref": "anon:5283779eb721635f",
+        "value": 0.6818181818181818,
+        "numerator": 15,
+        "denominator": 22,
+        "min_sample": 10,
+        "sample_ok": true
+      },
+      {
+        "metric_id": "team_damage_per_round",
+        "formula_version": "1.3.0",
+        "player_ref": "anon:70cfbe972148a343",
+        "value": 0,
+        "numerator": 0,
+        "denominator": 22,
+        "min_sample": 10,
+        "sample_ok": true
+      },
+      {
+        "metric_id": "team_damage_per_round",
+        "formula_version": "1.3.0",
+        "player_ref": "anon:991bad101135e6b9",
+        "value": 0.4090909090909091,
+        "numerator": 9,
+        "denominator": 22,
+        "min_sample": 10,
+        "sample_ok": true
+      },
+      {
+        "metric_id": "team_damage_per_round",
+        "formula_version": "1.3.0",
+        "player_ref": "anon:9b7931e2bc4c6caf",
+        "value": 1.2272727272727273,
+        "numerator": 27,
+        "denominator": 22,
+        "min_sample": 10,
+        "sample_ok": true
+      },
+      {
+        "metric_id": "team_damage_per_round",
+        "formula_version": "1.3.0",
+        "player_ref": "anon:cd6646c940cc25de",
+        "value": 1.2727272727272727,
+        "numerator": 28,
+        "denominator": 22,
+        "min_sample": 10,
+        "sample_ok": true
+      },
+      {
+        "metric_id": "team_damage_per_round",
+        "formula_version": "1.3.0",
+        "player_ref": "anon:d45279825529b0e5",
+        "value": 0,
+        "numerator": 0,
+        "denominator": 22,
+        "min_sample": 10,
+        "sample_ok": true
+      },
+      {
+        "metric_id": "team_damage_per_round",
+        "formula_version": "1.3.0",
+        "player_ref": "anon:f2abe3c241f57c4d",
+        "value": 0.13636363636363635,
+        "numerator": 3,
+        "denominator": 22,
+        "min_sample": 10,
+        "sample_ok": true
+      },
+      {
+        "metric_id": "team_damage_per_round",
+        "formula_version": "1.3.0",
+        "player_ref": "steam:76561190000000010",
+        "value": 0.22727272727272727,
+        "numerator": 5,
+        "denominator": 22,
+        "min_sample": 10,
+        "sample_ok": true
+      },
+      {
+        "metric_id": "team_damage_per_round",
+        "formula_version": "1.3.0",
+        "player_ref": "steam:76561190000000012",
+        "value": 2.0454545454545454,
+        "numerator": 45,
+        "denominator": 22,
+        "min_sample": 10,
+        "sample_ok": true
+      }
+    ],
+    "awards": [
+      {
+        "award_id": "cegador-de-amigos",
+        "metric_id": "friendly_flash_per_round",
+        "formula_version": "1.3.0",
+        "winner_ref": "steam:76561190000000010",
+        "value": 0.025497566569935192,
+        "numerator": 0.5609464645385742,
+        "denominator": 22,
+        "criterion": "Segundos de cegueira causados em companheiros de time, por round jogado. Cegar a si mesmo nao conta. Minimo de 10 rounds e 2 membros elegiveis.",
+        "tied_with": [
+          "steam:76561190000000010"
+        ]
+      },
+      {
+        "award_id": "perigo-interno",
+        "metric_id": "team_damage_per_round",
+        "formula_version": "1.3.0",
+        "winner_ref": "steam:76561190000000012",
+        "value": 2.0454545454545454,
+        "numerator": 45,
+        "denominator": 22,
+        "criterion": "Dano de vida causado em companheiros de time, por round jogado. Dano em si mesmo nao conta. Minimo de 10 rounds e 2 membros elegiveis.",
+        "tied_with": [
+          "steam:76561190000000012"
+        ]
+      },
+      {
+        "award_id": "primeiro-a-cair",
+        "metric_id": "first_death_rate",
+        "formula_version": "1.3.0",
+        "winner_ref": "steam:76561190000000012",
+        "value": 0.4090909090909091,
+        "numerator": 9,
+        "denominator": 22,
+        "criterion": "Proporcao de rounds em que o jogador foi a primeira morte do proprio time. Numerador: rounds em que morreu antes de qualquer companheiro de lado. Denominador: rounds jogados. Minimo de 10 rounds para concorrer e 2 membros elegiveis para haver premio.",
+        "tied_with": [
+          "steam:76561190000000012"
+        ]
+      }
+    ]
+  }
+}

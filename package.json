@@ -1,0 +1,23 @@
+{
+  "name": "hall-cs2-design",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Espelho de design do HALL - CS2 EDITION. So o front; dados sinteticos.",
+  "engines": {
+    "node": ">=22.18.0"
+  },
+  "workspaces": [
+    "packages/*",
+    "apps/*"
+  ],
+  "scripts": {
+    "dev": "npm run dev --workspace @hall/web",
+    "build": "npm run build --workspace @hall/web",
+    "typecheck": "npm run typecheck --workspaces --if-present"
+  },
+  "devDependencies": {
+    "@types/node": "^24.10.2",
+    "typescript": "5.9.3"
+  }
+}

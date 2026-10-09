@@ -1,0 +1,39 @@
+---
+/**
+ * Anotação manuscrita de margem.
+ *
+ * Decorativa: some em telas estreitas, onde não há margem para ela, e é
+ * `aria-hidden` porque é piada visual, não informação.
+ */
+interface Props {
+  texto: string;
+  /** Inclinação em graus. */
+  giro?: number;
+  classe?: string;
+  /** Seta desenhada à mão apontando para o conteúdo ao lado. */
+  seta?: "nenhuma" | "direita" | "esquerda";
+  /** Coroa de rabisco ao fim da frase, como na referência. */
+  coroa?: boolean;
+}
+const { texto, giro = -4, classe = "", seta = "nenhuma", coroa = false } = Astro.props;
+---
+
+<p
+  class:list={[
+    "anotacao pointer-events-none absolute hidden select-none text-[1.35rem] 2xl:block",
+    classe,
+  ]}
+  style={`--giro:${giro}deg`}
+  aria-hidden="true"
+>
+  {seta === "esquerda" && <span class="mr-1">←</span>}
+  {texto}
+  {seta === "direita" && <span class="ml-1">→</span>}
+  {
+    coroa && (
+      <svg viewBox="0 0 24 18" class="ml-1.5 inline-block h-4 w-5 fill-accent align-baseline">
+        <path d="M1 4.5 5.5 11 12 1.5 18.5 11 23 4.5 20.5 17h-17L1 4.5Z" />
+      </svg>
+    )
+  }
+</p>

@@ -1,0 +1,86 @@
+---
+import { marcaDeMapa } from "../lib/arte.ts";
+import { ilustracaoDe } from "../lib/ilustracao.ts";
+import { CENAS, CENA_PADRAO } from "@lobby/card";
+
+/**
+ * Miniatura ilustrativa do card.
+ *
+ * Três níveis, nesta ordem:
+ *
+ *  1. **arte de verdade**, quando existe arquivo em `src/assets/ilustracoes/`
+ *     com o nome da chave. É o alvo: raster rico, na pegada das referências;
+ *  2. **cena desenhada em código**, o fallback atual;
+ *  3. **marca do mapa**, quando a chave não tem cena nenhuma.
+ *
+ * O card nunca fica sem imagem, e trocar o nível 2 pelo 1 é soltar um arquivo
+ * na pasta — nenhuma mudança de código.
+ *
+ * A largura é FIXA (`w-32` / `sm:w-44`), nunca percentual: a miniatura vive
+ * dentro de um invólucro `shrink-0` que se dimensiona pelo conteúdo, então uma
+ * porcentagem resolve contra largura indeterminada e colapsa para alguns pixels.
+ * Foi exatamente isso que deixou as imagens minúsculas.
+ */
+interface Props {
+  /** `record_id` do Hall ou `award_id` do Jornal. */
+  chave: string;
+  /** Usado só no terceiro nível. */
+  mapa?: string;
+  alt: string;
+}
+const { chave, mapa, alt } = Astro.props;
+
+const url = ilustracaoDe(chave);
+const cena = url ? null : (CENAS[chave] ?? (mapa ? null : CENA_PADRAO));
+const marca = !url && !cena && mapa ? marcaDeMapa(mapa) : null;
+---
+
+<div
+  class="relative aspect-[4/3] w-32 shrink-0 overflow-hidden rounded-lg border border-line bg-sunk sm:w-44"
+>
+  {url && <img src={url} alt={alt} loading="lazy" class="h-full w-full object-cover" />}
+
+  {
+    cena && (
+      <svg viewBox="0 0 100 100" class="h-full w-full p-3" role="img" aria-label={alt}>
+        {(cena.preenchidos ?? []).map((d) => (
+          <path d={d} fill="var(--color-accent-ghost)" />
+        ))}
+        {cena.tracos.map((d) => (
+          <path
+            d={d}
+            fill="none"
+            stroke="var(--color-accent)"
+            stroke-width="8"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        ))}
+        {(cena.detalhes ?? []).map((d) => (
+          <path
+            d={d}
+            fill="none"
+            stroke="var(--color-ink-soft)"
+            stroke-width="5"
+            stroke-linecap="round"
+          />
+        ))}
+      </svg>
+    )
+  }
+
+  {
+    marca && (
+      <svg viewBox={marca.viewBox} class="h-full w-full" role="img" aria-label={alt}>
+        <path d={marca.planta} fill={`oklch(0.34 0.07 ${marca.matiz})`} />
+        <path
+          d={marca.planta}
+          fill="none"
+          stroke={`oklch(0.72 0.11 ${marca.matiz})`}
+          stroke-width="2"
+          stroke-linejoin="round"
+        />
+      </svg>
+    )
+  }
+</div>

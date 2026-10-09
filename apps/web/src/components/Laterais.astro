@@ -1,0 +1,112 @@
+---
+import estojo from "../assets/laterais/estojo-fuzil-latao.webp";
+import cartucho from "../assets/laterais/cartucho-rifle.webp";
+import caixa from "../assets/laterais/caixa-militar.webp";
+import galinha from "../assets/laterais/galinha.webp";
+import atordoamento from "../assets/laterais/granada-atordoamento.webp";
+import fumaca from "../assets/laterais/granada-fumaca.webp";
+import coroa from "../assets/laterais/coroa-graffiti.webp";
+import mira from "../assets/laterais/mira-graffiti.webp";
+import contagem from "../assets/laterais/marca-contagem.webp";
+import triste from "../assets/laterais/rosto-triste.webp";
+
+/**
+ * Elementos de decoração espalhados nas margens.
+ *
+ * Substituem a textura de fundo, que tingia a página inteira e competia com o
+ * conteúdo. Aqui o fundo é cor sólida e a graça vem de objetos soltos nas
+ * bordas — o centro, onde o texto mora, fica limpo.
+ *
+ * As posições são **fixas e escritas à mão**, não sorteadas: posição aleatória
+ * mudaria a cada render e um objeto acabaria em cima de um card. Cada entrada
+ * diz de que lado fica, a que altura da seção, o tamanho e a inclinação.
+ *
+ * Tudo é `aria-hidden` e `pointer-events-none`: é cenário, não conteúdo, e não
+ * pode capturar clique de nada que esteja embaixo.
+ *
+ * Só aparece a partir de `2xl`. Abaixo disso não existe margem livre — os
+ * objetos cairiam sobre os cards em vez de ao lado deles.
+ */
+
+interface Elemento {
+  src: ImageMetadata;
+  lado: "esquerda" | "direita";
+  /** Distância do topo da seção, em porcentagem. */
+  topo: number;
+  /**
+   * Distância da BORDA DA JANELA, em rem. Positivo afasta da borda.
+   *
+   * A primeira versão usava recuo negativo grande (-9rem) achando que os
+   * elementos deviam "sair" pela lateral. Com o invólucro em `overflow-hidden`,
+   * o que sobrava na tela era uma lasquinha. Negativo aqui agora é no máximo
+   * -2rem, que é o corte parcial de propósito, como na referência.
+   */
+  recuo: number;
+  largura: number;
+  giro: number;
+  opacidade: number;
+  /**
+   * Desfoque em px — o que mais ancora o objeto.
+   *
+   * Sem ele os elementos liam como adesivos colados na tela: mesma nitidez do
+   * conteúdo, logo mesmo plano. Fora de foco, o olho os coloca ATRÁS. Quanto
+   * menor e mais "distante" o objeto, mais desfoque.
+   */
+  desfoque: number;
+}
+
+/*
+ * A coluna de conteúdo tem 1280px (`max-w-7xl`). Em 1536px sobram 8rem de
+ * margem de cada lado — é a folga real que estes objetos têm, e por isso eles
+ * ficam entre 110 e 200px. Um pedaço encostar no card é esperado: o card é
+ * opaco e passa por cima, exatamente como na referência.
+ */
+const ELEMENTOS: Elemento[] = [
+  { src: caixa, lado: "esquerda", topo: 1, recuo: -2, largura: 210, giro: -8, opacidade: 0.8, desfoque: 2 },
+  { src: coroa, lado: "esquerda", topo: 13, recuo: 1, largura: 105, giro: -14, opacidade: 0.5, desfoque: 4 },
+  { src: estojo, lado: "esquerda", topo: 25, recuo: -1, largura: 160, giro: 24, opacidade: 0.75, desfoque: 2.5 },
+  { src: contagem, lado: "esquerda", topo: 40, recuo: 1.5, largura: 90, giro: -5, opacidade: 0.4, desfoque: 4.5 },
+  { src: galinha, lado: "esquerda", topo: 54, recuo: -1.5, largura: 185, giro: 6, opacidade: 0.85, desfoque: 1.5 },
+  { src: triste, lado: "esquerda", topo: 71, recuo: 2, largura: 85, giro: 10, opacidade: 0.35, desfoque: 5 },
+  { src: fumaca, lado: "esquerda", topo: 84, recuo: -2, largura: 195, giro: -12, opacidade: 0.8, desfoque: 2 },
+
+  { src: mira, lado: "direita", topo: 3, recuo: 1, largura: 125, giro: 12, opacidade: 0.45, desfoque: 4 },
+  { src: atordoamento, lado: "direita", topo: 16, recuo: -1.5, largura: 180, giro: -18, opacidade: 0.85, desfoque: 1.5 },
+  { src: cartucho, lado: "direita", topo: 32, recuo: 1.5, largura: 115, giro: 40, opacidade: 0.6, desfoque: 3.5 },
+  { src: fumaca, lado: "direita", topo: 47, recuo: -2, largura: 200, giro: 14, opacidade: 0.8, desfoque: 2 },
+  { src: contagem, lado: "direita", topo: 62, recuo: 2, largura: 85, giro: 8, opacidade: 0.35, desfoque: 5 },
+  { src: caixa, lado: "direita", topo: 75, recuo: -2.5, largura: 205, giro: 11, opacidade: 0.8, desfoque: 2 },
+  { src: galinha, lado: "direita", topo: 89, recuo: 0.5, largura: 155, giro: -7, opacidade: 0.7, desfoque: 2.5 },
+];
+---
+
+<div class="pointer-events-none absolute inset-0 hidden overflow-hidden 2xl:block" aria-hidden="true">
+  {
+    ELEMENTOS.map((e) => (
+      <img
+        src={e.src.src}
+        alt=""
+        loading="lazy"
+        width={e.largura}
+        height={e.largura}
+        class="absolute select-none"
+        style={[
+          `top:${e.topo}%`,
+          e.lado === "esquerda" ? `left:${e.recuo}rem` : `right:${e.recuo}rem`,
+          `width:${e.largura}px`,
+          `transform:rotate(${e.giro}deg)`,
+          `opacity:${e.opacidade}`,
+          /*
+           * Três camadas de profundidade, nesta ordem:
+           *  - `blur` tira o objeto do plano focal do conteúdo;
+           *  - `brightness`/`saturate` o empurram para o fundo, porque o que
+           *    está longe perde luz e cor antes de perder forma;
+           *  - `drop-shadow` dá peso, para ele pousar em vez de flutuar.
+           */
+          `filter:blur(${e.desfoque}px) brightness(0.62) saturate(0.8) ` +
+            `drop-shadow(0 18px 26px rgb(0 0 0 / 0.55))`,
+        ].join(";")}
+      />
+    ))
+  }
+</div>

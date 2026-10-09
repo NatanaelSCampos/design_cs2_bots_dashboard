@@ -1,0 +1,78 @@
+---
+import type { DadosDoCard } from "@lobby/card";
+
+/**
+ * Botões de compartilhar o card como imagem.
+ *
+ * Fica escondido até o script assumir: sem JavaScript não há canvas, e botão
+ * que não faz nada é pior que botão ausente.
+ *
+ * Não existe botão de Instagram nem de WhatsApp porque **eles não funcionam na
+ * web**: o Instagram não tem URL de compartilhamento, e o `wa.me?text=` não
+ * anexa imagem. "Compartilhar" usa a Web Share API, que no celular abre a
+ * bandeja nativa onde os dois aparecem com o PNG em mãos.
+ */
+interface Props {
+  dados: DadosDoCard;
+  /** URLs das imagens que o PNG deve conter, para o card baixado bater com a tela. */
+  ilustracao?: string | null;
+  selo?: string | null;
+  logo?: string | null;
+}
+const { dados, ilustracao, selo, logo } = Astro.props;
+
+const BOTAO =
+  "flex flex-1 items-center justify-center gap-2.5 rounded-lg border border-line px-4 py-3 " +
+  "font-mono text-xs tracking-[0.08em] text-ink-soft uppercase transition-colors " +
+  "hover:border-accent hover:bg-accent-ghost/40 hover:text-accent";
+---
+
+<div
+  data-compartilhar
+  hidden
+  class="flex flex-wrap gap-3"
+  data-ilustracao={ilustracao ?? undefined}
+  data-selo={selo ?? undefined}
+  data-logo={logo ?? undefined}
+>
+  <button type="button" data-acao="compartilhar" class={BOTAO}>
+    <svg viewBox="0 0 24 24" class="h-4 w-4 shrink-0" aria-hidden="true">
+      <g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+        <circle cx="18" cy="5" r="2.6"></circle>
+        <circle cx="6" cy="12" r="2.6"></circle>
+        <circle cx="18" cy="19" r="2.6"></circle>
+        <path d="m8.4 10.8 7.2-4.2M8.4 13.2l7.2 4.2"></path>
+      </g>
+    </svg>
+    <span data-rotulo>Compartilhar</span>
+  </button>
+
+  <button type="button" data-acao="baixar" class={BOTAO}>
+    <svg viewBox="0 0 24 24" class="h-4 w-4 shrink-0" aria-hidden="true">
+      <g
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.8"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <path d="M12 3v11"></path>
+        <path d="m7.5 10 4.5 4.5 4.5-4.5"></path>
+        <path d="M4 17.5v1.5a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-1.5"></path>
+      </g>
+    </svg>
+    <span data-rotulo>Baixar PNG</span>
+  </button>
+
+  <button type="button" data-acao="copiar" class={BOTAO}>
+    <svg viewBox="0 0 24 24" class="h-4 w-4 shrink-0" aria-hidden="true">
+      <g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round">
+        <rect x="9" y="9" width="11" height="12" rx="2"></rect>
+        <path d="M15 5.5A2.5 2.5 0 0 0 12.5 3h-7A2.5 2.5 0 0 0 3 5.5v9A2.5 2.5 0 0 0 5.5 17"></path>
+      </g>
+    </svg>
+    <span data-rotulo>Copiar</span>
+  </button>
+
+  <script type="application/json" set:html={JSON.stringify(dados)} />
+</div>

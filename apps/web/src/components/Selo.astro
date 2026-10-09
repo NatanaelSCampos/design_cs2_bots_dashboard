@@ -1,0 +1,30 @@
+---
+/**
+ * Selo de estado (vergonha / fama / amostra curta).
+ *
+ * Cor de status **nunca vai sozinha**: o selo sempre carrega glifo e texto.
+ * Quem não distingue as cores, quem imprime em cinza e quem usa
+ * `forced-colors` continua lendo o mesmo significado.
+ */
+interface Props {
+  tipo: "vergonha" | "fama" | "curta" | "ok";
+}
+const { tipo } = Astro.props;
+
+const config = {
+  vergonha: { glifo: "▼", rotulo: "vergonha", classe: "border-warn/40 bg-warn/10 text-warn" },
+  fama: { glifo: "▲", rotulo: "fama", classe: "border-accent/40 bg-accent-ghost text-accent" },
+  curta: { glifo: "!", rotulo: "amostra curta", classe: "border-warn/40 bg-warn/10 text-warn" },
+  ok: { glifo: "✓", rotulo: "amostra ok", classe: "border-ok/40 bg-ok/10 text-ok" },
+}[tipo];
+---
+
+<span
+  class:list={[
+    config.classe,
+    "inline-flex items-center gap-1.5 rounded-full border px-2.5 py-0.5 font-mono text-[0.65rem] tracking-[0.08em] uppercase",
+  ]}
+>
+  <span aria-hidden="true">{config.glifo}</span>
+  {config.rotulo}
+</span>

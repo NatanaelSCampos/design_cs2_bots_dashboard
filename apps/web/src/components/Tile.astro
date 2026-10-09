@@ -1,0 +1,13 @@
+---
+interface Props {
+  valor: string;
+  rotulo: string;
+  detalhe?: string;
+}
+const { valor, rotulo, detalhe } = Astro.props;
+---
+<div class="bg-surface p-5">
+  <p class="num text-2xl font-semibold leading-tight">{valor}</p>
+  <p class="mt-0.5 text-sm text-ink-soft">{rotulo}</p>
+  {detalhe && <p class="num mt-0.5 text-xs text-ink-faint">{detalhe}</p>}
+</div>

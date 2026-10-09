@@ -1,0 +1,175 @@
+---
+import Base from "../layouts/Base.astro";
+import Aviso from "../components/Aviso.astro";
+import { ApiError, buscarHall, buscarPremios } from "../lib/api.ts";
+import { rotuloEixo, rotuloMetrica } from "../lib/format.ts";
+import type { AwardsReport, HallReport } from "@lobby/contracts";
+
+/**
+ * Página de critérios.
+ *
+ * Os textos de critério NÃO são reescritos aqui: vêm do próprio prêmio, como o
+ * cálculo os gerou. Se a regra mudar no código, esta página muda junto — não há
+ * como ela ficar desatualizada em relação ao que foi de fato aplicado.
+ */
+let relatorio: AwardsReport | null = null;
+let hall: HallReport | null = null;
+let erro: string | null = null;
+
+try {
+  [relatorio, hall] = await Promise.all([buscarPremios(), buscarHall()]);
+} catch (e) {
+  erro = e instanceof ApiError ? e.message : String(e);
+}
+
+/** Critérios efetivamente aplicados, sem repetir o mesmo prêmio por jogador. */
+const criteriosAtivos = new Map<
+  string,
+  { titulo: string; eixo: string; stat: string; criterio: string }
+>();
+for (const jogador of relatorio?.players ?? []) {
+  for (const a of jogador.awards) {
+    if (!criteriosAtivos.has(a.award_id)) {
+      criteriosAtivos.set(a.award_id, {
+        titulo: a.title,
+        eixo: a.axis,
+        stat: a.stat,
+        criterio: a.criterion,
+      });
+    }
+  }
+}
+
+const regras = [
+  {
+    titulo: "Todo número tem numerador e denominador",
+    texto:
+      "Nenhuma estatística aparece sozinha. O denominador é sempre rounds, tiros ou oportunidades — nunca uma nota geral de habilidade inventada.",
+  },
+  {
+    titulo: "Amostra mínima antes de premiar",
+    texto:
+      "Prêmios por partida exigem 10 rounds jogados. Prêmios de carreira exigem 20 rounds em cada lado da comparação e 25% de diferença entre eles. Abaixo disso é ruído, e o número continua visível mas não vira prêmio.",
+  },
+  {
+    titulo: "Prêmio comparativo exige disputa",
+    texto:
+      "Prêmios que comparam pessoas (quem cai primeiro, quem mais machuca o time) precisam de pelo menos dois membros elegíveis. Com um candidato só, o vencedor seria sempre a mesma pessoa por falta de concorrência.",
+  },
+  {
+    titulo: "Prêmio de contraste compara a pessoa com ela mesma",
+    texto:
+      "Os prêmios de carreira comparam o mesmo jogador em dois contextos — com amigos ou sozinho, Wingman ou 5v5, vitórias ou derrotas. Por isso funcionam mesmo com um único membro cadastrado.",
+  },
+  {
+    titulo: "Terceiros nunca concorrem",
+    texto:
+      "Quem não é membro da liga é anonimizado com um identificador diferente em cada partida, e não acumula histórico nem recebe prêmio.",
+  },
+  {
+    titulo: "Os números mudam quando chegam partidas novas",
+    texto:
+      "Prêmios de carreira são um retrato do momento. Um padrão sustentado por poucas partidas pode desaparecer quando mais dados chegam — e isso é o sistema funcionando, não um erro.",
+  },
+];
+---
+
+<Base
+  titulo="Critérios"
+  subtitulo="Como cada número é calculado e o que um prêmio precisa para existir. Os textos de critério vêm do próprio cálculo, não de uma cópia escrita à mão."
+>
+  <div class="flex flex-col gap-12">
+    {
+      hall && (
+        <section class="flex flex-col gap-4">
+          <h2 class="font-display text-2xl font-bold">Hall</h2>
+          <p class="max-w-[70ch] text-ink-soft">
+            Recordes de uma partida só, não de carreira. Tudo é medido por round: sem isso a
+            partida mais longa venceria todo recorde de volume.
+          </p>
+          <ul class="flex max-w-[70ch] flex-col gap-2 text-sm text-ink-soft">
+            <li>
+              — Uma atuação só entra com <strong class="num text-ink">{hall.min_rounds}</strong>{" "}
+              rounds ou mais.
+            </li>
+            <li>
+              — Um recorde precisa de pelo menos <strong class="text-ink">duas</strong> atuações
+              para ser um extremo, em vez do único dado disponível.
+            </li>
+            <li>— Empate é resolvido pela amostra maior.</li>
+            <li>— Só membros da liga aparecem; terceiros ficam anonimizados por partida.</li>
+            <li>
+              — As ilustrações dos cards são arte, não dado: nenhum número está codificado nelas.
+            </li>
+          </ul>
+          <p class="num text-sm text-ink-faint">
+            Hoje: {hall.qualifying_performances} atuações elegíveis · fórmula{" "}
+            {hall.formula_version}
+          </p>
+        </section>
+      )
+    }
+
+    <section class="flex flex-col gap-4">
+      <h2 class="font-display text-xl font-semibold">Regras gerais</h2>
+      <div class="flex flex-col gap-px overflow-hidden rounded-md bg-line">
+        {
+          regras.map((r) => (
+            <div class="bg-surface p-5">
+              <h3 class="font-display text-base font-semibold">{r.titulo}</h3>
+              <p class="mt-1 max-w-[70ch] text-sm text-ink-soft">{r.texto}</p>
+            </div>
+          ))
+        }
+      </div>
+    </section>
+
+    <section class="flex flex-col gap-4">
+      <h2 class="font-display text-xl font-semibold">Prêmios atribuídos hoje</h2>
+
+      {erro && <Aviso titulo="Não consegui carregar os critérios aplicados" detalhe={erro} />}
+
+      {
+        !erro && criteriosAtivos.size === 0 && (
+          <p class="text-ink-soft">
+            Nenhum prêmio está sendo atribuído no momento. As regras acima continuam valendo.
+          </p>
+        )
+      }
+
+      {
+        criteriosAtivos.size > 0 && (
+          <div class="flex flex-col gap-px overflow-hidden rounded-md bg-line">
+            {[...criteriosAtivos.entries()].map(([id, c]) => (
+              <div class="bg-surface p-5">
+                <div class="flex flex-wrap items-baseline gap-x-3">
+                  <h3 class="font-display text-base font-semibold">{c.titulo}</h3>
+                  <span class="num text-xs text-ink-faint">{id}</span>
+                </div>
+                <p class="mt-1 text-xs text-ink-faint">
+                  {rotuloMetrica(c.stat)} · eixo {rotuloEixo(c.eixo)}
+                </p>
+                <p class="mt-2 max-w-[70ch] text-sm text-ink-soft">{c.criterio}</p>
+              </div>
+            ))}
+          </div>
+        )
+      }
+    </section>
+
+    <section class="flex flex-col gap-4">
+      <h2 class="font-display text-xl font-semibold">Privacidade</h2>
+      <div class="max-w-[70ch] space-y-3 text-sm text-ink-soft">
+        <p>
+          Membros da liga aparecem com SteamID e apelido porque concordaram com isso. Todos os
+          outros jogadores são mapeados para um identificador anônimo derivado por partida — a
+          mesma pessoa recebe identificadores diferentes em partidas diferentes, de propósito.
+        </p>
+        <p>
+          Chat e voz nunca são extraídos das demos. As demos brutas ficam apenas no computador de
+          quem processa e nunca são enviadas para o armazenamento remoto.
+        </p>
+      </div>
+    </section>
+  </div>
+</Base>

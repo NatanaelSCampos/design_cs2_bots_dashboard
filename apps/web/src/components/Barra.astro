@@ -1,0 +1,29 @@
+---
+interface Props {
+  rotulo: string;
+  valor: string;
+  detalhe: string;
+  proporcao: number;
+  destaque?: boolean;
+}
+const { rotulo, valor, detalhe, proporcao, destaque = false } = Astro.props;
+const largura = Math.max(2, Math.min(100, proporcao * 100));
+---
+<div class="flex flex-col gap-1.5">
+  <div class="flex items-baseline justify-between gap-4">
+    <span class:list={["num text-sm font-semibold", destaque ? "text-ink" : "text-ink-soft"]}>
+      {rotulo}
+    </span>
+    <span class:list={["num text-sm font-semibold", destaque ? "text-accent" : "text-ink-soft"]}>
+      {valor}
+    </span>
+  </div>
+  <div class="h-3.5 overflow-hidden rounded-sm bg-sunk">
+    <div
+      class:list={["h-full rounded-r-sm", destaque ? "bg-accent" : "bg-accent-ghost"]}
+      style={`width:${largura}%`}
+    >
+    </div>
+  </div>
+  <span class="num text-xs text-ink-faint">{detalhe}</span>
+</div>

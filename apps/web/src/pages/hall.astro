@@ -1,0 +1,258 @@
+---
+import Base from "../layouts/Base.astro";
+import Aviso from "../components/Aviso.astro";
+import CardRecorde from "../components/CardRecorde.astro";
+import HeroHall from "../components/HeroHall.astro";
+import Anotacao from "../components/Anotacao.astro";
+import Laterais from "../components/Laterais.astro";
+import iconeTrofeu from "../assets/nav-hall.webp";
+import { Image } from "astro:assets";
+import { ApiError, buscarHall } from "../lib/api.ts";
+import type { HallEntry, HallReport } from "@lobby/contracts";
+
+let hall: HallReport | null = null;
+let erro: string | null = null;
+
+try {
+  hall = await buscarHall();
+} catch (e) {
+  erro = e instanceof ApiError ? e.message : String(e);
+}
+
+/**
+ * Os recortes do Hall, na ordem em que aparecem.
+ *
+ * O recente vem primeiro e é o padrão: o Hall absoluto congela depois de
+ * algumas dezenas de partidas — bater um extremo histórico fica raro — e a
+ * página passava a parecer parada mesmo com a coleta funcionando. O absoluto
+ * continua a um clique, porque é ele que guarda o recorde de verdade.
+ */
+interface Escopo {
+  id: string;
+  rotulo: string;
+  amostra: string;
+  vergonha: HallEntry[];
+  fama: HallEntry[];
+  notes: string[];
+}
+
+const escopos: Escopo[] = [];
+if (hall) {
+  for (const janela of hall.windows) {
+    escopos.push({
+      id: janela.window_id,
+      rotulo: janela.label,
+      amostra: `${janela.matches} partidas · ${janela.qualifying_performances} atuações`,
+      vergonha: janela.vergonha,
+      fama: janela.fama,
+      notes: janela.notes,
+    });
+  }
+  escopos.push({
+    id: "sempre",
+    rotulo: "De sempre",
+    amostra: `${hall.qualifying_performances} atuações desde a primeira partida`,
+    vergonha: hall.vergonha,
+    fama: hall.fama,
+    notes: hall.notes,
+  });
+}
+
+/**
+ * Quem é recorde absoluto, para o recorte recente poder dizer quando a atuação
+ * bateu o histórico inteiro, e não só as últimas partidas. Sem isso o número
+ * grande não distingue "o maior das últimas dez" de "o maior de todos".
+ */
+const chaveDe = (e: HallEntry): string => `${e.record_id}|${e.match_id}|${e.player_ref}`;
+const absolutos = new Set(hall ? [...hall.vergonha, ...hall.fama].map(chaveDe) : []);
+
+const secoes = [
+  {
+    chave: "vergonha" as const,
+    titulo: "Hall da Vergonha",
+    texto: "As atuações que ninguém quer no currículo.",
+    anotacao: "Grandes erros fazem grandes lendas.",
+  },
+  {
+    chave: "fama" as const,
+    titulo: "Hall da Fama",
+    texto: "As que valeram o ingresso.",
+    anotacao: "Aconteceu. Tem print.",
+  },
+];
+---
+
+<Base titulo="Hall" semCabecalho>
+  <HeroHall />
+
+  {/*
+    O fundo precisa sangrar na largura TODA da janela, então ele fica num
+    invólucro sem limite de largura e o conteúdo é que se contém por dentro.
+    Antes a classe estava no próprio `main` com `max-w-7xl`, e o `::before`
+    ficava preso ao container — a textura parava nas laterais do conteúdo.
+  */}
+  <div class="secao-cards">
+    <Laterais />
+    <main class="relative mx-auto max-w-7xl px-6 py-10">
+      <Anotacao
+        texto="Mapa é grande, não mora nele."
+        giro={-8}
+        seta="direita"
+        classe="top-[32%] -left-4 w-40 -translate-x-full"
+      />
+      <Anotacao
+        texto="Nasceu para morrer. Útil… só que não."
+        giro={6}
+        classe="top-[56%] -right-4 w-44 translate-x-full"
+      />
+
+      {erro && <Aviso titulo="Não consegui carregar o Hall" detalhe={erro} />}
+
+      {
+        hall && (
+          <div class="flex flex-col gap-8">
+            {/*
+              A alternância só aparece quando existe mais de um recorte. Com
+              histórico curto o recorte recente é o próprio Hall absoluto, e o
+              contrato devolve `windows` vazio — aí não há o que alternar.
+            */}
+            {escopos.length > 1 && (
+              <div class="flex flex-wrap items-center gap-x-4 gap-y-2">
+                <div
+                  role="tablist"
+                  aria-label="Recorte do Hall"
+                  class="flex shrink-0 rounded-md border border-line bg-surface p-1"
+                >
+                  {escopos.map((esc, i) => (
+                    <button
+                      type="button"
+                      role="tab"
+                      data-aba-escopo={esc.id}
+                      aria-selected={i === 0 ? "true" : "false"}
+                      tabindex={i === 0 ? 0 : -1}
+                      class="aba-escopo rounded px-3.5 py-1.5 font-mono text-[0.7rem] tracking-[0.1em] uppercase"
+                    >
+                      {esc.rotulo}
+                    </button>
+                  ))}
+                </div>
+                {escopos.map((esc, i) => (
+                  <p
+                    data-escopo={esc.id}
+                    class:list={["num text-sm text-ink-faint", { hidden: i !== 0 }]}
+                  >
+                    {esc.amostra}
+                  </p>
+                ))}
+              </div>
+            )}
+
+            {escopos.map((esc, i) => (
+              <div data-escopo={esc.id} class:list={[{ hidden: i !== 0 }]}>
+                <div class="flex flex-col gap-12">
+                  {secoes.map((secao) => {
+                    const entradas = esc[secao.chave];
+                    return (
+                      <section class="relative flex flex-col gap-5">
+                        <div class="flex items-start gap-4">
+                          <Image
+                            src={iconeTrofeu}
+                            alt=""
+                            width={52}
+                            height={52}
+                            class="mt-0.5 shrink-0"
+                          />
+                          <div class="flex min-w-0 flex-col">
+                            <div class="flex flex-wrap items-center gap-x-4 gap-y-2">
+                              <h2 class="font-display text-[2rem] leading-none font-bold">
+                                {secao.titulo}
+                              </h2>
+                              {/*
+                                Pílula de filtro. Hoje é PLACEHOLDER: desenha o
+                                seletor da referência mas não filtra nada, e por
+                                isso vem desabilitada com o motivo no `title` —
+                                botão que aceita clique e não faz nada é pior
+                                que botão visivelmente desligado.
+                              */}
+                              <button
+                                type="button"
+                                disabled
+                                title="Filtro por seção ainda não implementado."
+                                class="flex shrink-0 items-center gap-2 rounded-md border border-accent/70 px-3 py-1.5 font-mono text-[0.68rem] tracking-[0.12em] text-accent uppercase"
+                              >
+                                {secao.chave}
+                                <svg viewBox="0 0 24 24" class="h-3 w-3" aria-hidden="true">
+                                  <path
+                                    d="m6 9 6 6 6-6"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    stroke-width="2.5"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                  />
+                                </svg>
+                              </button>
+                            </div>
+                            <p class="mt-1.5 text-ink-soft">{secao.texto}</p>
+                          </div>
+                        </div>
+
+                        {secao.anotacao && (
+                          <Anotacao
+                            texto={secao.anotacao}
+                            giro={secao.chave === "vergonha" ? -4 : 3}
+                            coroa
+                            classe="top-0 right-0 w-56 text-right"
+                          />
+                        )}
+
+                        {entradas.length === 0 ? (
+                          <p class="text-ink-soft">
+                            Nenhum recorde ainda. Veja os motivos no fim da página.
+                          </p>
+                        ) : (
+                          <div class="grid gap-5 md:grid-cols-2">
+                            {/*
+                              Sem prop de destaque posicional: o selo "MVP do
+                              Bagre" vem do pacote de arte, e só o card que o
+                              tem o exibe. Antes era por posição, o que era um
+                              ranking inventado.
+                            */}
+                            {entradas.map((e) => (
+                              <CardRecorde
+                                entrada={e}
+                                absoluto={esc.id !== "sempre" && absolutos.has(chaveDe(e))}
+                              />
+                            ))}
+                          </div>
+                        )}
+                      </section>
+                    );
+                  })}
+
+                  {esc.notes.length > 0 && (
+                    <details class="rounded-md border border-line bg-surface/50 p-5">
+                      <summary class="cursor-pointer text-sm text-ink-soft">
+                        Por que alguns recordes não saíram ({esc.notes.length})
+                      </summary>
+                      <ul class="mt-3 flex flex-col gap-2 text-sm text-ink-faint">
+                        {esc.notes.map((nota) => (
+                          <li>— {nota}</li>
+                        ))}
+                      </ul>
+                    </details>
+                  )}
+                </div>
+              </div>
+            ))}
+          </div>
+        )
+      }
+    </main>
+  </div>
+</Base>
+
+<script>
+  import "../scripts/compartilhar.ts";
+  import "../scripts/escopo-hall.ts";
+</script>
